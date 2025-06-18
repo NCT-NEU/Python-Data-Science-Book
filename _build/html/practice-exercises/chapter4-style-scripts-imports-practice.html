@@ -1,0 +1,1000 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Style Guides, Scripts, Imports &#8212; Khoa học dữ liệu trong Kinh tế và Kinh doanh</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'practice-exercises/chapter4-style-scripts-imports-practice';</script>
+    <link rel="canonical" href="https://www.tomasbeuzen.com/python-programming-for-data-science/practice-exercises/chapter4-style-scripts-imports-practice.html" />
+    <link rel="icon" href="../_static/favicon2.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="NumPy" href="chapter5-numpy-practice.html" />
+    <link rel="prev" title="Unit Tests &amp; Classes" href="chapter3-tests-classes-practice.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Khoa học dữ liệu trong Kinh tế và Kinh doanh - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Khoa học dữ liệu trong Kinh tế và Kinh doanh - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Khoa học dữ liệu trong Kinh tế và Kinh doanh
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapters/gioi-thieu-ve-khoa-hoc-du-lieu.html">Chương 1: Các khái niệm cơ bản trong khoa học dữ liệu</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../chapters/nguyen-ly-phan-tich-du-lieu.html">Chương 2: Nguyên lý của phân tích dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/khung-phuong-phap-xay-dung-mo-hinh.html">Chương 3: Khung phương pháp luận trong xây dựng mô hình</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter4-basics.html">Chương 4: Python cơ bản</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter5-Numpy.html">Chương 5: Kiến thức cơ bản về NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter6-pandas.html">Chương 6: Giới thiệu về <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter7-Import-data.html">Chương 7: Nhập và lưu trữ dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter8-prepare.html">Chương 8: Làm sạch và chuẩn bị dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter9-transform.html">Chương 9: Sắp xếp và biến đổi dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter10-visualization.html">10. Trực quan hóa dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter11-IntroML.html">Chương: Tổng quan về xây dựng mô hình trên dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter12-Supervised.html">Chương 12: Các mô hình học máy có giám sát</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter13-Unsupervised.html">Chương 13: Học máy không giám sát</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Practice Exercises</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1-basics-practice.html">Python Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2-loops-functions-practice.html">Loops &amp; Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3-tests-classes-practice.html">Unit Tests &amp; Classes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Style Guides, Scripts, Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5-numpy-practice.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter7-pandas-practice.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter8-wrangling-basics-practice.html">Basic Wrangling With Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter9-wrangling-advanced-practice.html">Advanced Wrangling With Pandas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/TomasBeuzen/python-programming-for-data-science" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/practice-exercises/chapter4-style-scripts-imports-practice.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Style Guides, Scripts, Imports</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">4.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">5.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><img alt="" src="../_images/banner.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="style-guides-scripts-imports">
+<h1>Style Guides, Scripts, Imports<a class="headerlink" href="#style-guides-scripts-imports" title="Link to this heading">#</a></h1>
+<p><strong>Tomas Beuzen, September 2020</strong></p>
+<p>These exercises complement <a class="reference internal" href="#../chapters/chapter4-style-scripts-imports.ipynb"><span class="xref myst">Chapter 4</span></a>.</p>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>1.<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">flake8</span></code> to list all the syntatic and stylistic problems with the following code. You could copy the code into a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file and run <code class="docutils literal notranslate"><span class="pre">flake8</span></code> from the command line (as was shown in <a class="reference internal" href="#../chapters/chapter4-style-scripts-imports.ipynb"><span class="xref myst">Chapter 4</span></a>), or you could try the <a class="reference external" href="https://github.com/mlshapiro/jupyterlab-flake8">JupyterLab flake8 extension</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">very_long_variable_name</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;field&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s1">&#39;is_debug&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="k">if</span> <span class="n">very_long_variable_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">very_long_variable_name</span><span class="p">[</span><span class="s2">&quot;field&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">very_long_variable_name</span><span class="p">[</span><span class="s1">&#39;is_debug&#39;</span><span class="p">]:</span>
+ <span class="n">z</span> <span class="o">=</span> <span class="s1">&#39;hello &#39;</span><span class="o">+</span><span class="s1">&#39;world&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+ <span class="n">f</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;hello </span><span class="si">{</span><span class="n">world</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="k">if</span> <span class="p">(</span><span class="kc">True</span><span class="p">):</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;hello &#39;&#39;world&#39;</span><span class="c1">#FIXME: https://github.com/python/black/issues/26</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Foo</span>  <span class="p">(</span>     <span class="nb">object</span>  <span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">f</span>    <span class="p">(</span><span class="bp">self</span>   <span class="p">):</span>
+    <span class="k">return</span>       <span class="mi">37</span><span class="o">*-</span><span class="mi">2</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">y</span>
+<span class="n">regular_formatting</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span>
+<span class="p">]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">CAPITALIZE</span><span class="p">(</span><span class="n">mystring</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mystring</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>2.<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">black</span></code> to autoformat the following code. You could copy the code into a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file and run <code class="docutils literal notranslate"><span class="pre">black</span></code> from the command line (as was shown in <a class="reference internal" href="#../chapters/chapter4-style-scripts-imports.ipynb"><span class="xref myst">Chapter 4</span></a>), or you could try the <a class="reference external" href="https://jupyterlab-code-formatter.readthedocs.io/en/latest/index.html">JupyterLab black extension</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">very_long_variable_name</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;field&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s1">&#39;is_debug&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="k">if</span> <span class="n">very_long_variable_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">very_long_variable_name</span><span class="p">[</span><span class="s2">&quot;field&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">very_long_variable_name</span><span class="p">[</span><span class="s1">&#39;is_debug&#39;</span><span class="p">]:</span>
+ <span class="n">z</span> <span class="o">=</span> <span class="s1">&#39;hello &#39;</span><span class="o">+</span><span class="s1">&#39;world&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+ <span class="n">f</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;hello </span><span class="si">{</span><span class="n">world</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="k">if</span> <span class="p">(</span><span class="kc">True</span><span class="p">):</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;hello &#39;&#39;world&#39;</span><span class="c1">#FIXME: https://github.com/python/black/issues/26</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Foo</span>  <span class="p">(</span>     <span class="nb">object</span>  <span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">f</span>    <span class="p">(</span><span class="bp">self</span>   <span class="p">):</span>
+    <span class="k">return</span>       <span class="mi">37</span><span class="o">*-</span><span class="mi">2</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">y</span>
+<span class="n">regular_formatting</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span>
+<span class="p">]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">CAPITALIZE</span><span class="p">(</span><span class="n">mystring</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mystring</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>3.<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="chapter3-tests-classes-practice.html"><span class="std std-doc">last set of practice exercises</span></a> we created the <code class="docutils literal notranslate"><span class="pre">Circle</span></code> class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A circle with a radius r.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the area of the circle.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">circumference</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the circumference of the circle.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;A Circle with radius </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Save this code into a new Python <code class="docutils literal notranslate"><span class="pre">.py</span></code> file and then import it here and answer the following:</p>
+<ol class="arabic simple">
+<li><p>What is the area of a circle with radius 10?</p></li>
+<li><p>What is the circumference of a circle with radius 10?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>4.<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>I recently decided to simulate the possible attendance at a party I was throwing using Python. The idea is that for every guest you invite, you assign them a probability of actually attending your party. For example:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Guest Name</p></th>
+<th class="head"><p>Probability of Attending</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tom</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Varada</p></td>
+<td><p>0.75</p></td>
+</tr>
+<tr class="row-even"><td><p>Tiffany</p></td>
+<td><p>0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Joel</p></td>
+<td><p>0.75</p></td>
+</tr>
+<tr class="row-even"><td><p>Alexi</p></td>
+<td><p>0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Joel</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>Mike</p></td>
+<td><p>0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hayley</p></td>
+<td><p>0.75</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In this exercise I want you to create a function that models each guest’s attendance as a <a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli random variable</a>. You can run a Bernoulli trial using the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> library function <code class="docutils literal notranslate"><span class="pre">random.binomial(n=1,</span> <span class="pre">...)</span></code> (here are the <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.binomial.html">docs</a>). You should import this function and run a single simulation on the list above (note that results may vary as we won’t fix the random seed here).</p>
+<p>I’ve given you the list of probabilities to get you started. Your code should output the total number of attendees after running your simulation.</p>
+<p><em>This question is based on a <a class="reference external" href="https://www.tomasbeuzen.com/post/party-planning-probability/">random website post I made recently</a>.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]</span>
+
+<span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>5.<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>So after completing Exercise 4, you have a way of running a single simulation given a list of probabilities. Now I want you to write a function called <code class="docutils literal notranslate"><span class="pre">simulate_party(probabilities,</span> <span class="pre">n)</span></code> that runs <code class="docutils literal notranslate"><span class="pre">n</span></code> simulations for a list of <code class="docutils literal notranslate"><span class="pre">probabilities</span></code> and returns a list of the total number of attendees for each simulation.</p>
+<p>Then, calculate the average guest attendance after running 100 simulations (round up to the nearest integer - hint: <code class="docutils literal notranslate"><span class="pre">math.ceil()</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_party</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="s2">&quot;Simulate attendance at a party from a list of attendance probabilities.&quot;</span>
+    <span class="k">pass</span>  <span class="c1"># Remove this line and add your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once you have a working function, uncomment the code below to plot the results of your function on a much longer guest list!</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use this code to plot your function on a bigger guest list!</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>  <span class="c1"># These lines are to do with plot formatting. We&#39;ll talk about them in a later chapter.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;axes.labelweight&#39;</span><span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)})</span>
+
+<span class="n">number_of_guests</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                                 <span class="n">size</span><span class="o">=</span><span class="n">number_of_guests</span><span class="p">,</span>
+                                 <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+
+<span class="c1"># attendance = simulate_party(probabilities, n=1000)</span>
+<span class="c1"># plt.hist(attendance, bins=20)</span>
+<span class="c1"># plt.xlabel(&quot;Avg. number of attendees&quot;)</span>
+<span class="c1"># plt.ylabel(&quot;Number of simulations&quot;);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr>
+<hr>
+<hr></section>
+</section>
+<section id="solutions">
+<h2>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h3>1.<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">flake8</span></code> to list all the syntatic and stylistic problems with the following code. You could copy the code into a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file and run <code class="docutils literal notranslate"><span class="pre">flake8</span></code> from the command line (as was shown in <a class="reference internal" href="#../chapters/chapter4-style-scripts-imports.ipynb"><span class="xref myst">Chapter 4</span></a>), or you could try the <a class="reference external" href="https://github.com/mlshapiro/jupyterlab-flake8">JupyterLab flake8 extension</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">very_long_variable_name</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;field&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s1">&#39;is_debug&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="k">if</span> <span class="n">very_long_variable_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">very_long_variable_name</span><span class="p">[</span><span class="s2">&quot;field&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">very_long_variable_name</span><span class="p">[</span><span class="s1">&#39;is_debug&#39;</span><span class="p">]:</span>
+ <span class="n">z</span> <span class="o">=</span> <span class="s1">&#39;hello &#39;</span><span class="o">+</span><span class="s1">&#39;world&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+ <span class="n">f</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;hello </span><span class="si">{</span><span class="n">world</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="k">if</span> <span class="p">(</span><span class="kc">True</span><span class="p">):</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;hello &#39;&#39;world&#39;</span><span class="c1">#FIXME: https://github.com/python/black/issues/26</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Foo</span>  <span class="p">(</span>     <span class="nb">object</span>  <span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">f</span>    <span class="p">(</span><span class="bp">self</span>   <span class="p">):</span>
+    <span class="k">return</span>       <span class="mi">37</span><span class="o">*-</span><span class="mi">2</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">y</span>
+<span class="n">regular_formatting</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span>
+<span class="p">]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">CAPITALIZE</span><span class="p">(</span><span class="n">mystring</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mystring</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>flake8<span class="w"> </span>bad_style.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;flake8&#39; is not recognized as an internal or external command,
+operable program or batch file.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>2.<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">black</span></code> to autoformat the following code. You could copy the code into a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file and run <code class="docutils literal notranslate"><span class="pre">black</span></code> from the command line (as was shown in <a class="reference internal" href="#../chapters/chapter4-style-scripts-imports.ipynb"><span class="xref myst">Chapter 4</span></a>), or you could try the <a class="reference external" href="https://jupyterlab-code-formatter.readthedocs.io/en/latest/index.html">JupyterLab black extension</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">very_long_variable_name</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;field&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s1">&#39;is_debug&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="k">if</span> <span class="n">very_long_variable_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">very_long_variable_name</span><span class="p">[</span><span class="s2">&quot;field&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">very_long_variable_name</span><span class="p">[</span><span class="s1">&#39;is_debug&#39;</span><span class="p">]:</span>
+ <span class="n">z</span> <span class="o">=</span> <span class="s1">&#39;hello &#39;</span><span class="o">+</span><span class="s1">&#39;world&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+ <span class="n">f</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;hello </span><span class="si">{</span><span class="n">world</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="k">if</span> <span class="p">(</span><span class="kc">True</span><span class="p">):</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;hello &#39;&#39;world&#39;</span><span class="c1">#FIXME: https://github.com/python/black/issues/26</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Foo</span>  <span class="p">(</span>     <span class="nb">object</span>  <span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">f</span>    <span class="p">(</span><span class="bp">self</span>   <span class="p">):</span>
+    <span class="k">return</span>       <span class="mi">37</span><span class="o">*-</span><span class="mi">2</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">y</span>
+<span class="n">regular_formatting</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span>
+<span class="p">]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">CAPITALIZE</span><span class="p">(</span><span class="n">mystring</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mystring</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># I used the Jupyter Lab code formatter extension for this.</span>
+
+<span class="n">very_long_variable_name</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;field&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;is_debug&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span>
+    <span class="n">very_long_variable_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="ow">and</span> <span class="n">very_long_variable_name</span><span class="p">[</span><span class="s2">&quot;field&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="ow">or</span> <span class="n">very_long_variable_name</span><span class="p">[</span><span class="s2">&quot;is_debug&quot;</span><span class="p">]</span>
+<span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="s2">&quot;hello &quot;</span> <span class="o">+</span> <span class="s2">&quot;world&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;hello </span><span class="si">{</span><span class="n">world</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;hello &quot;</span> <span class="s2">&quot;world&quot;</span>  <span class="c1"># FIXME: https://github.com/python/black/issues/26</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">37</span> <span class="o">*</span> <span class="o">-</span><span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">y</span>
+
+
+<span class="n">regular_formatting</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">CAPITALIZE</span><span class="p">(</span><span class="n">mystring</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mystring</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h3>3.<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="chapter3-tests-classes-practice.html"><span class="std std-doc">last set of practice exercises</span></a> we created the <code class="docutils literal notranslate"><span class="pre">Circle</span></code> class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A circle with a radius r.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the area of the circle.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">circumference</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the circumference of the circle.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;A Circle with radius </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Save this code into a new Python <code class="docutils literal notranslate"><span class="pre">.py</span></code> file and then import it here and answer the following:</p>
+<ol class="arabic simple">
+<li><p>What is the area of a circle with radius 10?</p></li>
+<li><p>What is the circumference of a circle with radius 10?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">circle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Circle</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The circle has area = </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">area</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The circle has circumference = </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">circumference</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The circle has area = 314.16
+The circle has circumference = 62.83
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h3>4.<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>I recently decided to simulate the possible attendance at a party I was throwing using Python. The idea is that for every guest you invite, you assign them a probability of actually attending your party. For example:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Guest Name</p></th>
+<th class="head"><p>Probability of Attending</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tom</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Varada</p></td>
+<td><p>0.75</p></td>
+</tr>
+<tr class="row-even"><td><p>Tiffany</p></td>
+<td><p>0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Joel</p></td>
+<td><p>0.75</p></td>
+</tr>
+<tr class="row-even"><td><p>Alexi</p></td>
+<td><p>0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Joel</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>Mike</p></td>
+<td><p>0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hayley</p></td>
+<td><p>0.75</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In this exercise I want you to create a function that models each guest’s attendance as a <a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli random variable</a>. You can run a Bernoulli trial using the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> library function <code class="docutils literal notranslate"><span class="pre">random.binomial(n=1,</span> <span class="pre">...)</span></code> (here are the <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.binomial.html">docs</a>). You should import this function and run a single simulation on the list above (note that results may vary as we won’t fix the random seed here).</p>
+<p>I’ve given you the list of probabilities to get you started. Your code should output the total number of attendees after running your simulation.</p>
+<p><em>This question is based on a <a class="reference external" href="https://www.tomasbeuzen.com/post/party-planning-probability/">random website post I made recently</a>.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">attendance_simulation</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">attendance_simulation</span><span class="p">)</span><span class="si">}</span><span class="s2"> guests attended the party in this simulation!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7 guests attended the party in this simulation!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h3>5.<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>So after completing Exercise 4, you have a way of running a single simulation given a list of probabilities. Now I want you to write a function that runs <code class="docutils literal notranslate"><span class="pre">n</span></code> simulations and returns a list of the total number of attendees for each simulation. Calculate the average guest attendance after running 100 simulations (round up to the nearest integer - hint: <code class="docutils literal notranslate"><span class="pre">math.ceil()</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_party</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="s2">&quot;Simulate attendance at a party from a list of attendance probabilities.&quot;</span>
+
+    <span class="n">attendance</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">attendance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">attendance</span>
+
+
+<span class="n">simulations</span> <span class="o">=</span> <span class="n">simulate_party</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Avg. number of guests across all simulations: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">simulations</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">simulations</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Avg. number of guests across all simulations: 6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use this code to plot your function on a bigger guest list!</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>  <span class="c1"># These lines are to do with plot formatting. We&#39;ll talk about them in a later chapter.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;axes.labelweight&#39;</span><span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)})</span>
+
+<span class="n">number_of_guests</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                                 <span class="n">size</span><span class="o">=</span><span class="n">number_of_guests</span><span class="p">,</span>
+                                 <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="n">attendance</span> <span class="o">=</span> <span class="n">simulate_party</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">attendance</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Avg. number of attendees&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of simulations&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/757c76670a4cd9a8146b3d7f736fcf9ea29fac39ffb3ddbc88015a166341e585.png" src="../_images/757c76670a4cd9a8146b3d7f736fcf9ea29fac39ffb3ddbc88015a166341e585.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./practice-exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chapter3-tests-classes-practice.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Unit Tests &amp; Classes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chapter5-numpy-practice.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">NumPy</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">4.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">5.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Trường Công nghệ, Đại học Kinh tế Quốc dân
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

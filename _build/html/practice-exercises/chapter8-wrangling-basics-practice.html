@@ -1,0 +1,1577 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Basic Wrangling With Pandas &#8212; Khoa học dữ liệu trong Kinh tế và Kinh doanh</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'practice-exercises/chapter8-wrangling-basics-practice';</script>
+    <link rel="canonical" href="https://www.tomasbeuzen.com/python-programming-for-data-science/practice-exercises/chapter8-wrangling-basics-practice.html" />
+    <link rel="icon" href="../_static/favicon2.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Advanced Wrangling With Pandas" href="chapter9-wrangling-advanced-practice.html" />
+    <link rel="prev" title="Pandas" href="chapter7-pandas-practice.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Khoa học dữ liệu trong Kinh tế và Kinh doanh - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Khoa học dữ liệu trong Kinh tế và Kinh doanh - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Khoa học dữ liệu trong Kinh tế và Kinh doanh
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapters/gioi-thieu-ve-khoa-hoc-du-lieu.html">Chương 1: Các khái niệm cơ bản trong khoa học dữ liệu</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../chapters/nguyen-ly-phan-tich-du-lieu.html">Chương 2: Nguyên lý của phân tích dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/khung-phuong-phap-xay-dung-mo-hinh.html">Chương 3: Khung phương pháp luận trong xây dựng mô hình</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter4-basics.html">Chương 4: Python cơ bản</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter5-Numpy.html">Chương 5: Kiến thức cơ bản về NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter6-pandas.html">Chương 6: Giới thiệu về <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter7-Import-data.html">Chương 7: Nhập và lưu trữ dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter8-prepare.html">Chương 8: Làm sạch và chuẩn bị dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter9-transform.html">Chương 9: Sắp xếp và biến đổi dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter10-visualization.html">10. Trực quan hóa dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter11-IntroML.html">Chương: Tổng quan về xây dựng mô hình trên dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter12-Supervised.html">Chương 12: Các mô hình học máy có giám sát</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/chapter13-Unsupervised.html">Chương 13: Học máy không giám sát</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Practice Exercises</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1-basics-practice.html">Python Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2-loops-functions-practice.html">Loops &amp; Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3-tests-classes-practice.html">Unit Tests &amp; Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4-style-scripts-imports-practice.html">Style Guides, Scripts, Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5-numpy-practice.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter7-pandas-practice.html">Pandas</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic Wrangling With Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter9-wrangling-advanced-practice.html">Advanced Wrangling With Pandas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/TomasBeuzen/python-programming-for-data-science" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/practice-exercises/chapter8-wrangling-basics-practice.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Basic Wrangling With Pandas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">8.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">9.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">10.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">4.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">5.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">6.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">7.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">8.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">9.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">10.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><img alt="" src="../_images/banner.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="basic-wrangling-with-pandas">
+<h1>Basic Wrangling With Pandas<a class="headerlink" href="#basic-wrangling-with-pandas" title="Link to this heading">#</a></h1>
+<p><strong>Tomas Beuzen, September 2020</strong></p>
+<p>These exercises complement <a class="reference internal" href="../chapters/chapter8-wrangling-basics.html"><span class="std std-doc">Chapter 8</span></a>.</p>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>1.<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>In this set of practice exercises we’ll be again looking at the dataset of consumption and carbon footprints of different foods that we looked at in the last set of practice exercises, which was compiled by <a class="reference external" href="https://r-tastic.co.uk/post/from-messy-to-tidy/">Kasia Kulma</a> and contributed to <a class="reference external" href="https://github.com/rfordatascience/tidytuesday">R’s Tidy Tuesday project</a>.</p>
+<p>Let’s start by importing pandas with the alias <code class="docutils literal notranslate"><span class="pre">pd</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>2.<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>As a reminder, the dataset has the following columns:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>column</p></th>
+<th class="head text-left"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>country</p></td>
+<td class="text-left"><p>Country Name</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>food_category</p></td>
+<td class="text-left"><p>Food Category</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>consumption</p></td>
+<td class="text-left"><p>Consumption (kg/person/year)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>co2_emmission</p></td>
+<td class="text-left"><p>Co2 Emission (Kg CO2/person/year)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Import the dataset as a dataframe named <code class="docutils literal notranslate"><span class="pre">df</span></code> from this url: <a class="reference external" href="https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv">https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>3.<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>What country consumes the most food per person per year (across all food categories)?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>4.<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Which food category is the biggest contributor to the above country’s consumption total?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>5.<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>What country produces the most kg C02 per person per year?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>6.<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>Which food category is the biggest contributor to the above country’s C02 emissions?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>7.<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>What food category produces the most C02 per person per year across all countries?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h3>8.<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>What food category is consumed the most across all countries per person per year? What food category is consumed the least across all countries?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h3>9.<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>Make the dataset wide by pivoting on the <code class="docutils literal notranslate"><span class="pre">food_category</span></code> column. You’ll end up with a “multi-index” dataframe, with multiple levels of columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h3>10.<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>Now that the dataset is wide, I want you to answer the same question from Question 5 above: “What country produces the most kg C02 per person per year?”. Specifically, I want you to notice that the way we answer the same data analysis question changes depending on the format of the data (wide vs long). You can form your own opinion on which option you prefer - I prefer long data (and remember that many visualization libraries work best with long data too - more on that in DSCI 531). <em>Hint</em>: you can index the outer layer of a multi-index column using the same syntax we’ve seen previously: <code class="docutils literal notranslate"><span class="pre">df['co2_emmission']</span></code>, if you wanted to access an inner index, you’d have to use a tuple: <code class="docutils literal notranslate"><span class="pre">df[(&quot;consumption&quot;,</span> <span class="pre">&quot;Beef&quot;)]</span></code>. Read more on multi-indexes (also called “hierarchical indexes”) in <a class="reference internal" href="../chapters/chapter9-wrangling-advanced.html"><span class="std std-doc">Chapter 9</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr>
+<hr>
+<hr></section>
+</section>
+<section id="solutions">
+<h2>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h2>
+<section id="id11">
+<h3>1.<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<p>In this set of practice exercises we’ll be again looking at the dataset of consumption and carbon footprints of different foods that we looked at in the last set of practice exercises, which was compiled by <a class="reference external" href="https://r-tastic.co.uk/post/from-messy-to-tidy/">Kasia Kulma</a> and contributed to <a class="reference external" href="https://github.com/rfordatascience/tidytuesday">R’s Tidy Tuesday project</a>.</p>
+<p>Let’s start by importing pandas with the alias <code class="docutils literal notranslate"><span class="pre">pd</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id12">
+<h3>2.<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>As a reminder, the dataset has the following columns:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>column</p></th>
+<th class="head text-left"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>country</p></td>
+<td class="text-left"><p>Country Name</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>food_category</p></td>
+<td class="text-left"><p>Food Category</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>consumption</p></td>
+<td class="text-left"><p>Consumption (kg/person/year)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>co2_emmission</p></td>
+<td class="text-left"><p>Co2 Emission (Kg CO2/person/year)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Import the dataset as a dataframe named <code class="docutils literal notranslate"><span class="pre">df</span></code> from this url: <a class="reference external" href="https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv">https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>food_category</th>
+      <th>consumption</th>
+      <th>co2_emmission</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Argentina</td>
+      <td>Pork</td>
+      <td>10.51</td>
+      <td>37.20</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Argentina</td>
+      <td>Poultry</td>
+      <td>38.66</td>
+      <td>41.53</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Argentina</td>
+      <td>Beef</td>
+      <td>55.48</td>
+      <td>1712.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Argentina</td>
+      <td>Lamb &amp; Goat</td>
+      <td>1.56</td>
+      <td>54.63</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Argentina</td>
+      <td>Fish</td>
+      <td>4.36</td>
+      <td>6.96</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1425</th>
+      <td>Bangladesh</td>
+      <td>Milk - inc. cheese</td>
+      <td>21.91</td>
+      <td>31.21</td>
+    </tr>
+    <tr>
+      <th>1426</th>
+      <td>Bangladesh</td>
+      <td>Wheat and Wheat Products</td>
+      <td>17.47</td>
+      <td>3.33</td>
+    </tr>
+    <tr>
+      <th>1427</th>
+      <td>Bangladesh</td>
+      <td>Rice</td>
+      <td>171.73</td>
+      <td>219.76</td>
+    </tr>
+    <tr>
+      <th>1428</th>
+      <td>Bangladesh</td>
+      <td>Soybeans</td>
+      <td>0.61</td>
+      <td>0.27</td>
+    </tr>
+    <tr>
+      <th>1429</th>
+      <td>Bangladesh</td>
+      <td>Nuts inc. Peanut Butter</td>
+      <td>0.72</td>
+      <td>1.27</td>
+    </tr>
+  </tbody>
+</table>
+<p>1430 rows × 4 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="id13">
+<h3>3.<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<p>What country consumes the most food per person per year (across all food categories)?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;consumption&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>food_category</th>
+      <th>consumption</th>
+      <th>co2_emmission</th>
+    </tr>
+    <tr>
+      <th>country</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Finland</th>
+      <td>PorkPoultryBeefLamb &amp; GoatFishEggsMilk - inc. ...</td>
+      <td>639.79</td>
+      <td>1464.63</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id14">
+<h3>4.<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<p>Which food category is the biggest contributor to the above country’s consumption total?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;country == &#39;Finland&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;consumption&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>food_category</th>
+      <th>consumption</th>
+      <th>co2_emmission</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>149</th>
+      <td>Finland</td>
+      <td>Milk - inc. cheese</td>
+      <td>430.76</td>
+      <td>613.57</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id15">
+<h3>5.<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<p>What country produces the most kg C02 per person per year?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;co2_emmission&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>food_category</th>
+      <th>consumption</th>
+      <th>co2_emmission</th>
+    </tr>
+    <tr>
+      <th>country</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Argentina</th>
+      <td>PorkPoultryBeefLamb &amp; GoatFishEggsMilk - inc. ...</td>
+      <td>429.41</td>
+      <td>2172.4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id16">
+<h3>6.<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<p>Which food category is the biggest contributor to the above country’s C02 emissions?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;country == &#39;Argentina&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;co2_emmission&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>food_category</th>
+      <th>consumption</th>
+      <th>co2_emmission</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>Argentina</td>
+      <td>Beef</td>
+      <td>55.48</td>
+      <td>1712.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id17">
+<h3>7.<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<p>What food category produces the most C02 per person per year across all countries?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;food_category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;co2_emmission&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>consumption</th>
+      <th>co2_emmission</th>
+    </tr>
+    <tr>
+      <th>food_category</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Beef</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>1576.04</td>
+      <td>48633.26</td>
+    </tr>
+    <tr>
+      <th>Milk - inc. cheese</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>16350.71</td>
+      <td>23290.00</td>
+    </tr>
+    <tr>
+      <th>Lamb &amp; Goat</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>338.02</td>
+      <td>11837.38</td>
+    </tr>
+    <tr>
+      <th>Pork</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>2096.08</td>
+      <td>7419.11</td>
+    </tr>
+    <tr>
+      <th>Rice</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>3818.77</td>
+      <td>4886.91</td>
+    </tr>
+    <tr>
+      <th>Fish</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>2247.32</td>
+      <td>3588.22</td>
+    </tr>
+    <tr>
+      <th>Poultry</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>2758.50</td>
+      <td>2963.16</td>
+    </tr>
+    <tr>
+      <th>Wheat and Wheat Products</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>9301.44</td>
+      <td>1773.78</td>
+    </tr>
+    <tr>
+      <th>Eggs</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>1061.29</td>
+      <td>974.95</td>
+    </tr>
+    <tr>
+      <th>Nuts inc. Peanut Butter</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>537.84</td>
+      <td>951.99</td>
+    </tr>
+    <tr>
+      <th>Soybeans</th>
+      <td>ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...</td>
+      <td>111.87</td>
+      <td>50.35</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id18">
+<h3>8.<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<p>What food category is consumed the most across all countries per person per year? What food category is consumed the least across all countries?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Most consumption:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;food_category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;consumption&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Least consumption:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;food_category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;consumption&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Most consumption:
+                                                              country  \
+food_category                                                           
+Milk - inc. cheese  ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...   
+
+                    consumption  co2_emmission  
+food_category                                   
+Milk - inc. cheese     16350.71        23290.0  
+
+Least consumption:
+                                                         country  consumption  \
+food_category                                                                   
+Soybeans       ArgentinaAustraliaAlbaniaIcelandNew ZealandUSA...       111.87   
+
+               co2_emmission  
+food_category                 
+Soybeans               50.35  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id19">
+<h3>9.<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+<p>Make the dataset wide by pivoting on the <code class="docutils literal notranslate"><span class="pre">food_category</span></code> column. You’ll end up with a “multi-index” dataframe, with multiple levels of columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;food_category&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">consumption</th>
+      <th>...</th>
+      <th colspan="10" halign="left">co2_emmission</th>
+    </tr>
+    <tr>
+      <th>food_category</th>
+      <th>Beef</th>
+      <th>Eggs</th>
+      <th>Fish</th>
+      <th>Lamb &amp; Goat</th>
+      <th>Milk - inc. cheese</th>
+      <th>Nuts inc. Peanut Butter</th>
+      <th>Pork</th>
+      <th>Poultry</th>
+      <th>Rice</th>
+      <th>Soybeans</th>
+      <th>...</th>
+      <th>Eggs</th>
+      <th>Fish</th>
+      <th>Lamb &amp; Goat</th>
+      <th>Milk - inc. cheese</th>
+      <th>Nuts inc. Peanut Butter</th>
+      <th>Pork</th>
+      <th>Poultry</th>
+      <th>Rice</th>
+      <th>Soybeans</th>
+      <th>Wheat and Wheat Products</th>
+    </tr>
+    <tr>
+      <th>country</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Albania</th>
+      <td>22.50</td>
+      <td>12.45</td>
+      <td>3.85</td>
+      <td>15.32</td>
+      <td>303.72</td>
+      <td>4.36</td>
+      <td>10.88</td>
+      <td>13.23</td>
+      <td>7.78</td>
+      <td>0.00</td>
+      <td>...</td>
+      <td>11.44</td>
+      <td>6.15</td>
+      <td>536.50</td>
+      <td>432.62</td>
+      <td>7.72</td>
+      <td>38.51</td>
+      <td>14.21</td>
+      <td>9.96</td>
+      <td>0.00</td>
+      <td>26.44</td>
+    </tr>
+    <tr>
+      <th>Algeria</th>
+      <td>5.60</td>
+      <td>8.06</td>
+      <td>3.74</td>
+      <td>7.69</td>
+      <td>141.53</td>
+      <td>2.08</td>
+      <td>0.00</td>
+      <td>7.42</td>
+      <td>2.97</td>
+      <td>0.00</td>
+      <td>...</td>
+      <td>7.40</td>
+      <td>5.97</td>
+      <td>269.30</td>
+      <td>201.60</td>
+      <td>3.68</td>
+      <td>0.00</td>
+      <td>7.97</td>
+      <td>3.80</td>
+      <td>0.00</td>
+      <td>35.36</td>
+    </tr>
+    <tr>
+      <th>Angola</th>
+      <td>8.42</td>
+      <td>1.11</td>
+      <td>15.24</td>
+      <td>1.08</td>
+      <td>12.30</td>
+      <td>2.26</td>
+      <td>8.89</td>
+      <td>17.33</td>
+      <td>8.12</td>
+      <td>0.52</td>
+      <td>...</td>
+      <td>1.02</td>
+      <td>24.33</td>
+      <td>37.82</td>
+      <td>17.52</td>
+      <td>4.00</td>
+      <td>31.47</td>
+      <td>18.62</td>
+      <td>10.39</td>
+      <td>0.23</td>
+      <td>7.77</td>
+    </tr>
+    <tr>
+      <th>Argentina</th>
+      <td>55.48</td>
+      <td>11.39</td>
+      <td>4.36</td>
+      <td>1.56</td>
+      <td>195.08</td>
+      <td>0.49</td>
+      <td>10.51</td>
+      <td>38.66</td>
+      <td>8.77</td>
+      <td>0.00</td>
+      <td>...</td>
+      <td>10.46</td>
+      <td>6.96</td>
+      <td>54.63</td>
+      <td>277.87</td>
+      <td>0.87</td>
+      <td>37.20</td>
+      <td>41.53</td>
+      <td>11.22</td>
+      <td>0.00</td>
+      <td>19.66</td>
+    </tr>
+    <tr>
+      <th>Armenia</th>
+      <td>19.66</td>
+      <td>11.69</td>
+      <td>4.36</td>
+      <td>3.02</td>
+      <td>209.03</td>
+      <td>2.55</td>
+      <td>9.67</td>
+      <td>13.35</td>
+      <td>3.18</td>
+      <td>0.00</td>
+      <td>...</td>
+      <td>10.74</td>
+      <td>6.96</td>
+      <td>105.76</td>
+      <td>297.74</td>
+      <td>4.51</td>
+      <td>34.23</td>
+      <td>14.34</td>
+      <td>4.07</td>
+      <td>0.00</td>
+      <td>24.91</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>Uruguay</th>
+      <td>29.10</td>
+      <td>13.14</td>
+      <td>6.53</td>
+      <td>8.23</td>
+      <td>210.54</td>
+      <td>0.95</td>
+      <td>16.84</td>
+      <td>27.45</td>
+      <td>11.50</td>
+      <td>0.01</td>
+      <td>...</td>
+      <td>12.07</td>
+      <td>10.43</td>
+      <td>288.21</td>
+      <td>299.89</td>
+      <td>1.68</td>
+      <td>59.61</td>
+      <td>29.49</td>
+      <td>14.72</td>
+      <td>0.00</td>
+      <td>20.85</td>
+    </tr>
+    <tr>
+      <th>Venezuela</th>
+      <td>25.89</td>
+      <td>5.63</td>
+      <td>8.34</td>
+      <td>0.32</td>
+      <td>117.79</td>
+      <td>0.35</td>
+      <td>7.23</td>
+      <td>39.28</td>
+      <td>23.39</td>
+      <td>0.00</td>
+      <td>...</td>
+      <td>5.17</td>
+      <td>13.32</td>
+      <td>11.21</td>
+      <td>167.78</td>
+      <td>0.62</td>
+      <td>25.59</td>
+      <td>42.19</td>
+      <td>29.93</td>
+      <td>0.00</td>
+      <td>9.38</td>
+    </tr>
+    <tr>
+      <th>Vietnam</th>
+      <td>7.44</td>
+      <td>3.84</td>
+      <td>26.52</td>
+      <td>0.14</td>
+      <td>16.36</td>
+      <td>6.28</td>
+      <td>35.00</td>
+      <td>12.36</td>
+      <td>144.56</td>
+      <td>5.75</td>
+      <td>...</td>
+      <td>3.53</td>
+      <td>42.34</td>
+      <td>4.90</td>
+      <td>23.30</td>
+      <td>11.12</td>
+      <td>123.88</td>
+      <td>13.28</td>
+      <td>184.99</td>
+      <td>2.59</td>
+      <td>2.00</td>
+    </tr>
+    <tr>
+      <th>Zambia</th>
+      <td>4.76</td>
+      <td>3.32</td>
+      <td>6.20</td>
+      <td>0.68</td>
+      <td>9.71</td>
+      <td>5.04</td>
+      <td>1.66</td>
+      <td>3.29</td>
+      <td>3.05</td>
+      <td>7.30</td>
+      <td>...</td>
+      <td>3.05</td>
+      <td>9.90</td>
+      <td>23.81</td>
+      <td>13.83</td>
+      <td>8.92</td>
+      <td>5.88</td>
+      <td>3.53</td>
+      <td>3.90</td>
+      <td>3.29</td>
+      <td>2.31</td>
+    </tr>
+    <tr>
+      <th>Zimbabwe</th>
+      <td>7.37</td>
+      <td>1.75</td>
+      <td>2.80</td>
+      <td>0.96</td>
+      <td>31.90</td>
+      <td>2.22</td>
+      <td>2.65</td>
+      <td>4.97</td>
+      <td>10.09</td>
+      <td>0.54</td>
+      <td>...</td>
+      <td>1.61</td>
+      <td>4.47</td>
+      <td>33.62</td>
+      <td>45.44</td>
+      <td>3.93</td>
+      <td>9.38</td>
+      <td>5.34</td>
+      <td>12.91</td>
+      <td>0.24</td>
+      <td>5.97</td>
+    </tr>
+  </tbody>
+</table>
+<p>130 rows × 22 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="id20">
+<h3>10.<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<p>Now that the dataset is wide, I want you to answer the same question from Question 5 above: “What country produces the most kg C02 per person per year?”. Specifically, I want you to notice that the way we answer the same data analysis question changes depending on the format of the data (wide vs long). You can form your own opinion on which option you prefer - I prefer long data (and remember that many visualization libraries work best with long data too - more on that in DSCI 531). <em>Hint</em>: you can index the outer layer of a multi-index column using the same syntax we’ve seen previously: <code class="docutils literal notranslate"><span class="pre">df['co2_emmission']</span></code>, if you wanted to access an inner index, you’d have to use a tuple: <code class="docutils literal notranslate"><span class="pre">df[(&quot;consumption&quot;,</span> <span class="pre">&quot;Beef&quot;)]</span></code>. Read more on multi-indexes (also called “hierarchical indexes”) in <a class="reference internal" href="../chapters/chapter9-wrangling-advanced.html"><span class="std std-doc">Chapter 9</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;consumption&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
+Finland    639.79
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./practice-exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chapter7-pandas-practice.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pandas</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chapter9-wrangling-advanced-practice.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Advanced Wrangling With Pandas</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">8.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">9.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">10.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">4.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">5.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">6.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">7.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">8.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">9.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">10.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Trường Công nghệ, Đại học Kinh tế Quốc dân
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

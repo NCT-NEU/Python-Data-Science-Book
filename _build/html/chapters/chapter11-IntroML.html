@@ -1,0 +1,1771 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chương: Tổng quan về xây dựng mô hình trên dữ liệu &#8212; Khoa học dữ liệu trong Kinh tế và Kinh doanh</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/chapter11-IntroML';</script>
+    <link rel="canonical" href="https://www.tomasbeuzen.com/python-programming-for-data-science/chapters/chapter11-IntroML.html" />
+    <link rel="icon" href="../_static/favicon2.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chương 12: Các mô hình học máy có giám sát" href="chapter12-Supervised.html" />
+    <link rel="prev" title="10. Trực quan hóa dữ liệu" href="chapter10-visualization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Khoa học dữ liệu trong Kinh tế và Kinh doanh - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Khoa học dữ liệu trong Kinh tế và Kinh doanh - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Khoa học dữ liệu trong Kinh tế và Kinh doanh
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="gioi-thieu-ve-khoa-hoc-du-lieu.html">Chương 1: Các khái niệm cơ bản trong khoa học dữ liệu</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="nguyen-ly-phan-tich-du-lieu.html">Chương 2: Nguyên lý của phân tích dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="khung-phuong-phap-xay-dung-mo-hinh.html">Chương 3: Khung phương pháp luận trong xây dựng mô hình</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4-basics.html">Chương 4: Python cơ bản</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5-Numpy.html">Chương 5: Kiến thức cơ bản về NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter6-pandas.html">Chương 6: Giới thiệu về <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter7-Import-data.html">Chương 7: Nhập và lưu trữ dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter8-prepare.html">Chương 8: Làm sạch và chuẩn bị dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter9-transform.html">Chương 9: Sắp xếp và biến đổi dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter10-visualization.html">10. Trực quan hóa dữ liệu</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chương: Tổng quan về xây dựng mô hình trên dữ liệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter12-Supervised.html">Chương 12: Các mô hình học máy có giám sát</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter13-Unsupervised.html">Chương 13: Học máy không giám sát</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Practice Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../practice-exercises/chapter1-basics-practice.html">Python Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practice-exercises/chapter2-loops-functions-practice.html">Loops &amp; Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practice-exercises/chapter3-tests-classes-practice.html">Unit Tests &amp; Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practice-exercises/chapter4-style-scripts-imports-practice.html">Style Guides, Scripts, Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practice-exercises/chapter5-numpy-practice.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practice-exercises/chapter7-pandas-practice.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practice-exercises/chapter8-wrangling-basics-practice.html">Basic Wrangling With Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practice-exercises/chapter9-wrangling-advanced-practice.html">Advanced Wrangling With Pandas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/TomasBeuzen/python-programming-for-data-science" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chapters/chapter11-IntroML.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chương: Tổng quan về xây dựng mô hình trên dữ liệu</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gioi-thieu">Giới thiệu</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tai-sao-lai-la-hoc-may">Tại sao lại là Học máy?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cac-van-de-hoc-may-co-the-giai-quyet">Các vấn đề Học máy có thể giải quyết</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hieu-ro-nhiem-vu-va-du-lieu-cua-ban">Hiểu rõ Nhiệm vụ và Dữ liệu của bạn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tai-sao-lai-la-python">Tại sao lại là Python?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn">scikit-learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cai-dat-scikit-learn">Cài đặt scikit-learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cac-thu-vien-va-cong-cu-thiet-yeu">Các Thư viện và Công cụ Thiết yếu</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook">Jupyter Notebook</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy">NumPy</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy">SciPy</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib">matplotlib</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas">pandas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mglearn">mglearn</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-2-va-python-3">Python 2 và Python 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cac-phien-ban-duoc-su-dung-trong-cuon-sach-nay">Các phiên bản được sử dụng trong cuốn sách này</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ung-dung-dau-tien-phan-loai-cac-loai-hoa-iris">Ứng dụng đầu tiên: Phân loại các loài hoa Iris</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gap-go-du-lieu">Gặp gỡ dữ liệu</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#do-luong-thanh-cong-du-lieu-huan-luyen-va-du-lieu-kiem-tra">Đo lường thành công: Dữ liệu huấn luyện và dữ liệu kiểm tra</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dieu-dau-tien-nhin-vao-du-lieu-cua-ban">Điều đầu tiên: Nhìn vào dữ liệu của bạn</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xay-dung-mo-hinh-dau-tien-cua-ban-k-hang-xom-gan-nhat">Xây dựng mô hình đầu tiên của bạn: k-Hàng xóm gần nhất</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dua-ra-du-doan">Đưa ra dự đoán</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#danh-gia-mo-hinh">Đánh giá mô hình</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tom-tat-va-trien-vong">Tóm tắt và Triển vọng</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chuong-tong-quan-ve-xay-dung-mo-hinh-tren-du-lieu">
+<h1>Chương: Tổng quan về xây dựng mô hình trên dữ liệu<a class="headerlink" href="#chuong-tong-quan-ve-xay-dung-mo-hinh-tren-du-lieu" title="Link to this heading">#</a></h1>
+<hr><section id="gioi-thieu">
+<h2>Giới thiệu<a class="headerlink" href="#gioi-thieu" title="Link to this heading">#</a></h2>
+<hr><p>Học máy là về việc trích xuất kiến thức từ dữ liệu. Đây là một lĩnh vực nghiên cứu nằm ở giao điểm của thống kê, trí tuệ nhân tạo và khoa học máy tính, và còn được biết đến với tên gọi phân tích dự báo hoặc học thống kê. Việc áp dụng các phương pháp học máy trong những năm gần đây đã trở nên phổ biến trong cuộc sống hàng ngày. Từ việc tự động đề xuất phim để xem, món ăn để đặt hoặc sản phẩm để mua, cho đến radio trực tuyến được cá nhân hóa và nhận dạng bạn bè trong ảnh của bạn, nhiều trang web và thiết bị hiện đại đều có các thuật toán học máy làm cốt lõi. Khi bạn nhìn vào một trang web phức tạp như Facebook, Amazon hoặc Netflix, rất có thể mọi phần của trang web đều chứa nhiều mô hình học máy.</p>
+<p>Ngoài các ứng dụng thương mại, học máy đã có một ảnh hưởng to lớn đến cách thức nghiên cứu dựa trên dữ liệu được thực hiện ngày nay. Các công cụ được giới thiệu trong cuốn sách này đã được áp dụng cho các vấn đề khoa học đa dạng như tìm hiểu về các ngôi sao, tìm kiếm các hành tinh xa xôi, khám phá các hạt mới, phân tích chuỗi DNA và cung cấp các phương pháp điều trị ung thư được cá nhân hóa.</p>
+<p>Tuy nhiên, ứng dụng của bạn không cần phải có quy mô lớn hoặc thay đổi thế giới như những ví dụ này để được hưởng lợi từ học máy. Trong chương này, chúng tôi sẽ giải thích tại sao học máy lại trở nên phổ biến và thảo luận về những loại vấn đề nào có thể được giải quyết bằng học máy. Sau đó, chúng tôi sẽ chỉ cho bạn cách xây dựng mô hình học máy đầu tiên của mình, đồng thời giới thiệu các khái niệm quan trọng.</p>
+<section id="tai-sao-lai-la-hoc-may">
+<h3>Tại sao lại là Học máy?<a class="headerlink" href="#tai-sao-lai-la-hoc-may" title="Link to this heading">#</a></h3>
+<p>Trong những ngày đầu của các ứng dụng “thông minh”, nhiều hệ thống đã sử dụng các quy tắc được mã hóa thủ công gồm các quyết định “if” và “else” để xử lý dữ liệu hoặc điều chỉnh theo đầu vào của người dùng. Hãy nghĩ về một bộ lọc thư rác có nhiệm vụ di chuyển các email đến phù hợp vào thư mục thư rác. Bạn có thể tạo ra một danh sách đen các từ sẽ khiến một email bị đánh dấu là thư rác. Đây sẽ là một ví dụ về việc sử dụng một hệ thống quy tắc do chuyên gia thiết kế để tạo ra một ứng dụng “thông minh”. Việc tạo ra các quy tắc quyết định một cách thủ công là khả thi đối với một số ứng dụng, đặc biệt là những ứng dụng mà con người hiểu rõ về quy trình cần mô hình hóa. Tuy nhiên, việc sử dụng các quy tắc được mã hóa thủ công để đưa ra quyết định có hai nhược điểm lớn:</p>
+<ul class="simple">
+<li><p>Logic cần thiết để đưa ra quyết định là đặc thù cho một lĩnh vực và nhiệm vụ duy nhất. Thay đổi nhiệm vụ dù chỉ một chút cũng có thể đòi hỏi phải viết lại toàn bộ hệ thống.</p></li>
+<li><p>Việc thiết kế các quy tắc đòi hỏi sự hiểu biết sâu sắc về cách một chuyên gia con người nên đưa ra quyết định.</p></li>
+</ul>
+<p>Một ví dụ về nơi mà phương pháp mã hóa thủ công này sẽ thất bại là trong việc phát hiện khuôn mặt trong hình ảnh. Ngày nay, mọi điện thoại thông minh đều có thể phát hiện khuôn mặt trong ảnh. Tuy nhiên, việc phát hiện khuôn mặt là một vấn đề chưa được giải quyết cho đến tận năm 2001. Vấn đề chính là cách mà các pixel (tạo nên một hình ảnh trong máy tính) được máy tính “nhận thức” rất khác so với cách con người nhận thức một khuôn mặt. Sự khác biệt này trong cách biểu diễn khiến cho con người gần như không thể đưa ra một bộ quy tắc tốt để mô tả những gì cấu thành một khuôn mặt trong một hình ảnh kỹ thuật số.</p>
+<p>Tuy nhiên, với học máy, chỉ cần cung cấp cho một chương trình một bộ sưu tập lớn các hình ảnh về khuôn mặt là đủ để một thuật toán xác định những đặc điểm nào là cần thiết để nhận dạng một khuôn mặt.</p>
+</section>
+<section id="cac-van-de-hoc-may-co-the-giai-quyet">
+<h3>Các vấn đề Học máy có thể giải quyết<a class="headerlink" href="#cac-van-de-hoc-may-co-the-giai-quyet" title="Link to this heading">#</a></h3>
+<p>Các loại thuật toán học máy thành công nhất là những thuật toán tự động hóa các quy trình ra quyết định bằng cách tổng quát hóa từ các ví dụ đã biết. Trong bối cảnh này, được gọi là <strong>học có giám sát</strong>, người dùng cung cấp cho thuật toán các cặp đầu vào và đầu ra mong muốn, và thuật toán sẽ tìm ra cách để tạo ra đầu ra mong muốn với một đầu vào cho trước. Cụ thể, thuật toán có thể tạo ra một đầu ra cho một đầu vào mà nó chưa từng thấy trước đây mà không cần sự giúp đỡ của con người. Quay trở lại ví dụ về phân loại thư rác, sử dụng học máy, người dùng cung cấp cho thuật toán một số lượng lớn email (là đầu vào), cùng với thông tin về việc liệu bất kỳ email nào trong số này có phải là thư rác hay không (là đầu ra mong muốn). Với một email mới, thuật toán sau đó sẽ đưa ra dự đoán về việc email mới có phải là thư rác hay không.</p>
+<p>Các thuật toán học máy học từ các cặp đầu vào/đầu ra được gọi là thuật toán học có giám sát vì có một “giáo viên” cung cấp sự giám sát cho các thuật toán dưới dạng các đầu ra mong muốn cho mỗi ví dụ mà chúng học. Mặc dù việc tạo ra một tập dữ liệu đầu vào và đầu ra thường là một quá trình thủ công tốn nhiều công sức, các thuật toán học có giám sát được hiểu rõ và hiệu suất của chúng rất dễ đo lường. Nếu ứng dụng của bạn có thể được xây dựng thành một bài toán học có giám sát và bạn có thể tạo ra một tập dữ liệu bao gồm kết quả mong muốn, thì học máy có khả năng giải quyết được vấn đề của bạn.</p>
+<p>Các ví dụ về nhiệm vụ học máy có giám sát bao gồm:</p>
+<p><strong>Xác định mã zip từ các chữ số viết tay trên phong bì</strong>
+Ở đây, đầu vào là một bản quét của chữ viết tay và đầu ra mong muốn là các chữ số thực tế trong mã zip. Để tạo một tập dữ liệu để xây dựng mô hình học máy, bạn cần thu thập nhiều phong bì. Sau đó, bạn có thể tự đọc các mã zip và lưu trữ các chữ số làm kết quả mong muốn của mình.</p>
+<p><strong>Xác định xem một khối u có lành tính hay không dựa trên hình ảnh y tế</strong>
+Ở đây, đầu vào là hình ảnh và đầu ra là liệu khối u có lành tính hay không. Để tạo một tập dữ liệu để xây dựng mô hình, bạn cần một cơ sở dữ liệu hình ảnh y tế. Bạn cũng cần ý kiến chuyên gia, vì vậy một bác sĩ cần phải xem tất cả các hình ảnh và quyết định khối u nào là lành tính và khối u nào không. Thậm chí có thể cần phải thực hiện chẩn đoán bổ sung ngoài nội dung của hình ảnh để xác định xem khối u trong hình ảnh có phải là ung thư hay không.</p>
+<p><strong>Phát hiện hoạt động gian lận trong các giao dịch thẻ tín dụng</strong>
+Ở đây, đầu vào là một bản ghi của giao dịch thẻ tín dụng và đầu ra là liệu nó có khả năng là gian lận hay không. Giả sử bạn là đơn vị phát hành thẻ tín dụng, việc thu thập tập dữ liệu có nghĩa là lưu trữ tất cả các giao dịch và ghi lại nếu người dùng báo cáo bất kỳ giao dịch nào là gian lận.</p>
+<p>Một điều thú vị cần lưu ý về những ví dụ này là mặc dù đầu vào và đầu ra trông khá đơn giản, quy trình thu thập dữ liệu cho ba nhiệm vụ này lại rất khác nhau. Trong khi việc đọc phong bì tốn nhiều công sức, nó lại dễ dàng và rẻ. Mặt khác, việc có được hình ảnh y tế và chẩn đoán không chỉ đòi hỏi máy móc đắt tiền mà còn cả kiến thức chuyên môn hiếm và đắt đỏ, chưa kể đến các mối quan tâm về đạo đức và quyền riêng tư. Trong ví dụ về phát hiện gian lận thẻ tín dụng, việc thu thập dữ liệu đơn giản hơn nhiều. Khách hàng của bạn sẽ cung cấp cho bạn đầu ra mong muốn, vì họ sẽ báo cáo gian lận. Tất cả những gì bạn phải làm để có được các cặp đầu vào/đầu ra của hoạt động gian lận và không gian lận là chờ đợi.</p>
+<p><strong>Thuật toán không giám sát</strong> là loại thuật toán khác mà chúng tôi sẽ đề cập trong cuốn sách này. Trong học không giám sát, chỉ có dữ liệu đầu vào được biết đến và không có dữ liệu đầu ra nào được cung cấp cho thuật toán. Mặc dù có nhiều ứng dụng thành công của các phương pháp này, chúng thường khó hiểu và khó đánh giá hơn.</p>
+<p>Các ví dụ về học không giám sát bao gồm:</p>
+<p><strong>Xác định các chủ đề trong một tập hợp các bài đăng trên blog</strong>
+Nếu bạn có một bộ sưu tập lớn dữ liệu văn bản, bạn có thể muốn tóm tắt nó và tìm các chủ đề phổ biến trong đó. Bạn có thể không biết trước những chủ đề này là gì, hoặc có bao nhiêu chủ đề. Do đó, không có đầu ra nào được biết đến.</p>
+<p><strong>Phân khúc khách hàng thành các nhóm có sở thích tương tự</strong>
+Với một tập hợp hồ sơ khách hàng, bạn có thể muốn xác định những khách hàng nào giống nhau và liệu có các nhóm khách hàng có sở thích tương tự hay không. Đối với một trang web mua sắm, đó có thể là “phụ huynh”, “mọt sách” hoặc “game thủ”. Vì bạn không biết trước những nhóm này có thể là gì, hoặc thậm chí có bao nhiêu nhóm, bạn không có đầu ra nào được biết đến.</p>
+<p><strong>Phát hiện các mẫu truy cập bất thường vào một trang web</strong>
+Để xác định hành vi lạm dụng hoặc lỗi, việc tìm ra các mẫu truy cập khác với bình thường thường rất hữu ích. Mỗi mẫu bất thường có thể rất khác nhau và bạn có thể không có bất kỳ trường hợp nào được ghi nhận về hành vi bất thường. Bởi vì trong ví dụ này bạn chỉ quan sát lưu lượng truy cập và bạn không biết điều gì cấu thành hành vi bình thường và bất thường, đây là một bài toán không giám sát.</p>
+<p>Đối với cả nhiệm vụ học có giám sát và không giám sát, điều quan trọng là phải có một biểu diễn dữ liệu đầu vào của bạn mà máy tính có thể hiểu được. Thường thì việc nghĩ về dữ liệu của bạn như một bảng sẽ hữu ích. Mỗi điểm dữ liệu mà bạn muốn suy luận (mỗi email, mỗi khách hàng, mỗi giao dịch) là một hàng, và mỗi thuộc tính mô tả điểm dữ liệu đó (chẳng hạn như tuổi của khách hàng hoặc số tiền hoặc vị trí của một giao dịch) là một cột. Bạn có thể mô tả người dùng bằng tuổi, giới tính, thời điểm họ tạo tài khoản và tần suất họ mua hàng từ cửa hàng trực tuyến của bạn. Bạn có thể mô tả hình ảnh của một khối u bằng các giá trị thang độ xám của mỗi pixel, hoặc có thể bằng cách sử dụng kích thước, hình dạng và màu sắc của khối u.</p>
+<p>Mỗi thực thể hoặc hàng ở đây được gọi là một <strong>mẫu</strong> (hoặc điểm dữ liệu) trong học máy, trong khi các cột—các thuộc tính mô tả những thực thể này—được gọi là <strong>đặc trưng</strong>.</p>
+<p>Sau này trong cuốn sách này, chúng ta sẽ đi sâu hơn vào chủ đề xây dựng một biểu diễn tốt cho dữ liệu của bạn, được gọi là <strong>trích xuất đặc trưng</strong> hoặc <strong>kỹ thuật đặc trưng</strong>. Tuy nhiên, bạn nên ghi nhớ rằng không có thuật toán học máy nào có thể đưa ra dự đoán về dữ liệu mà nó không có thông tin. Ví dụ, nếu đặc trưng duy nhất bạn có cho một bệnh nhân là họ của họ, không có thuật toán nào có thể dự đoán giới tính của họ. Thông tin này đơn giản là không có trong dữ liệu của bạn. Nếu bạn thêm một đặc trưng khác chứa tên của bệnh nhân, bạn sẽ may mắn hơn nhiều, vì thường có thể biết được giới tính qua tên của một người.</p>
+</section>
+<section id="hieu-ro-nhiem-vu-va-du-lieu-cua-ban">
+<h3>Hiểu rõ Nhiệm vụ và Dữ liệu của bạn<a class="headerlink" href="#hieu-ro-nhiem-vu-va-du-lieu-cua-ban" title="Link to this heading">#</a></h3>
+<p>Có lẽ phần quan trọng nhất trong quy trình học máy là hiểu rõ dữ liệu bạn đang làm việc và mối quan hệ của nó với nhiệm vụ bạn muốn giải quyết. Sẽ không hiệu quả nếu bạn chọn một thuật toán một cách ngẫu nhiên và đưa dữ liệu của mình vào đó. Cần phải hiểu những gì đang diễn ra trong tập dữ liệu của bạn trước khi bạn bắt đầu xây dựng một mô hình. Mỗi thuật toán đều khác nhau về loại dữ liệu và bối cảnh vấn đề mà nó hoạt động tốt nhất. Khi bạn đang xây dựng một giải pháp học máy, bạn nên trả lời, hoặc ít nhất là ghi nhớ, các câu hỏi sau:</p>
+<ul class="simple">
+<li><p>Câu hỏi tôi đang cố gắng trả lời là gì? Tôi có nghĩ rằng dữ liệu thu thập được có thể trả lời câu hỏi đó không?</p></li>
+<li><p>Cách tốt nhất để diễn đạt câu hỏi của tôi thành một bài toán học máy là gì?</p></li>
+<li><p>Tôi đã thu thập đủ dữ liệu để đại diện cho vấn đề tôi muốn giải quyết chưa?</p></li>
+<li><p>Tôi đã trích xuất những đặc trưng nào của dữ liệu, và liệu những đặc trưng này có cho phép đưa ra những dự đoán đúng đắn không?</p></li>
+<li><p>Tôi sẽ đo lường thành công trong ứng dụng của mình như thế nào?</p></li>
+<li><p>Giải pháp học máy sẽ tương tác với các phần khác trong nghiên cứu hoặc sản phẩm kinh doanh của tôi như thế nào?</p></li>
+</ul>
+<p>Trong một bối cảnh rộng lớn hơn, các thuật toán và phương pháp trong học máy chỉ là một phần của một quy trình lớn hơn để giải quyết một vấn đề cụ thể, và việc luôn ghi nhớ bức tranh toàn cảnh là điều tốt. Nhiều người dành rất nhiều thời gian để xây dựng các giải pháp học máy phức tạp, chỉ để phát hiện ra rằng chúng không giải quyết đúng vấn đề.</p>
+<p>Khi đi sâu vào các khía cạnh kỹ thuật của học máy (như chúng ta sẽ làm trong cuốn sách này), rất dễ bị mất đi mục tiêu cuối cùng. Mặc dù chúng tôi sẽ không thảo luận chi tiết về các câu hỏi được liệt kê ở đây, chúng tôi vẫn khuyến khích bạn ghi nhớ tất cả các giả định mà bạn có thể đang đưa ra, một cách rõ ràng hoặc ngầm định, khi bạn bắt đầu xây dựng các mô hình học máy.</p>
+</section>
+<section id="tai-sao-lai-la-python">
+<h3>Tại sao lại là Python?<a class="headerlink" href="#tai-sao-lai-la-python" title="Link to this heading">#</a></h3>
+<p>Python đã trở thành ngôn ngữ chung cho nhiều ứng dụng khoa học dữ liệu. Nó kết hợp sức mạnh của các ngôn ngữ lập trình đa năng với sự dễ sử dụng của các ngôn ngữ kịch bản chuyên biệt như MATLAB hoặc R. Python có các thư viện để tải dữ liệu, trực quan hóa, thống kê, xử lý ngôn ngữ tự nhiên, xử lý hình ảnh, và nhiều hơn nữa. Hộp công cụ rộng lớn này cung cấp cho các nhà khoa học dữ liệu một loạt lớn các chức năng chung và chuyên dụng. Một trong những ưu điểm chính của việc sử dụng Python là khả năng tương tác trực tiếp với mã, sử dụng một terminal hoặc các công cụ khác như Jupyter Notebook, mà chúng ta sẽ xem xét ngay sau đây. Học máy và phân tích dữ liệu về cơ bản là các quy trình lặp đi lặp lại, trong đó dữ liệu thúc đẩy phân tích. Điều cần thiết cho các quy trình này là có các công cụ cho phép lặp lại nhanh chóng và tương tác dễ dàng.</p>
+<p>Là một ngôn ngữ lập trình đa năng, Python cũng cho phép tạo ra các giao diện người dùng đồ họa (GUI) và dịch vụ web phức tạp, và để tích hợp vào các hệ thống hiện có.</p>
+</section>
+<section id="scikit-learn">
+<h3>scikit-learn<a class="headerlink" href="#scikit-learn" title="Link to this heading">#</a></h3>
+<p><strong>scikit-learn</strong> là một dự án mã nguồn mở, có nghĩa là nó miễn phí để sử dụng và phân phối, và bất kỳ ai cũng có thể dễ dàng lấy mã nguồn để xem những gì đang diễn ra đằng sau. Dự án scikit-learn liên tục được phát triển và cải tiến, và nó có một cộng đồng người dùng rất tích cực. Nó chứa một số thuật toán học máy tiên tiến, cũng như tài liệu toàn diện về mỗi thuật toán. scikit-learn là một công cụ rất phổ biến và là thư viện Python nổi bật nhất cho học máy. Nó được sử dụng rộng rãi trong ngành công nghiệp và học thuật, và có rất nhiều hướng dẫn và đoạn mã có sẵn trực tuyến. scikit-learn hoạt động tốt với một số công cụ Python khoa học khác, mà chúng ta sẽ thảo luận sau trong chương này.</p>
+<p>Trong khi đọc, chúng tôi khuyên bạn cũng nên duyệt qua hướng dẫn sử dụng và tài liệu API của scikit-learn để biết thêm chi tiết và nhiều tùy chọn hơn cho mỗi thuật toán. Tài liệu trực tuyến rất kỹ lưỡng, và cuốn sách này sẽ cung cấp cho bạn tất cả các kiến thức nền tảng về học máy để hiểu nó một cách chi tiết.</p>
+</section>
+<section id="cai-dat-scikit-learn">
+<h3>Cài đặt scikit-learn<a class="headerlink" href="#cai-dat-scikit-learn" title="Link to this heading">#</a></h3>
+<p>scikit-learn phụ thuộc vào hai gói Python khác, <strong>NumPy</strong> và <strong>SciPy</strong>. Để vẽ đồ thị và phát triển tương tác, bạn cũng nên cài đặt <strong>matplotlib</strong>, <strong>IPython</strong> và <strong>Jupyter Notebook</strong>. Chúng tôi khuyên bạn nên sử dụng một trong các bản phân phối Python được đóng gói sẵn sau đây, chúng sẽ cung cấp các gói cần thiết:</p>
+<ul class="simple">
+<li><p><strong>Anaconda</strong>: Một bản phân phối Python được tạo ra để xử lý dữ liệu quy mô lớn, phân tích dự báo và tính toán khoa học. Anaconda đi kèm với NumPy, SciPy, matplotlib, pandas, IPython, Jupyter Notebook và scikit-learn. Có sẵn trên Mac OS, Windows và Linux, đây là một giải pháp rất tiện lợi và là giải pháp chúng tôi đề xuất cho những người không có sẵn cài đặt các gói Python khoa học. Anaconda hiện cũng bao gồm thư viện Intel MKL thương mại miễn phí. Việc sử dụng MKL (được thực hiện tự động khi Anaconda được cài đặt) có thể cải thiện tốc độ đáng kể cho nhiều thuật toán trong scikit-learn.</p></li>
+<li><p><strong>Enthought Canopy</strong>: Một bản phân phối Python khác cho tính toán khoa học. Nó đi kèm với NumPy, SciPy, matplotlib, pandas và IPython, nhưng phiên bản miễn phí không có scikit-learn. Nếu bạn là thành viên của một tổ chức học thuật, cấp bằng, bạn có thể yêu cầu giấy phép học thuật và được truy cập miễn phí vào phiên bản trả phí của Enthought Canopy. Enthought Canopy có sẵn cho Python 2.7.x và hoạt động trên Mac OS, Windows và Linux.</p></li>
+<li><p><strong>Python(x,y)</strong>: Một bản phân phối Python miễn phí cho tính toán khoa học, đặc biệt cho Windows. Python(x,y) đi kèm với NumPy, SciPy, matplotlib, pandas, IPython và scikit-learn.</p></li>
+</ul>
+<p>Nếu bạn đã có một cài đặt Python, bạn có thể sử dụng <code class="docutils literal notranslate"><span class="pre">pip</span></code> để cài đặt tất cả các gói này:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install numpy scipy matplotlib ipython scikit-learn pandas
+</pre></div>
+</div>
+</section>
+<section id="cac-thu-vien-va-cong-cu-thiet-yeu">
+<h3>Các Thư viện và Công cụ Thiết yếu<a class="headerlink" href="#cac-thu-vien-va-cong-cu-thiet-yeu" title="Link to this heading">#</a></h3>
+<p>Việc hiểu rõ scikit-learn là gì và cách sử dụng nó là rất quan trọng, nhưng có một vài thư viện khác sẽ nâng cao trải nghiệm của bạn. scikit-learn được xây dựng trên nền tảng các thư viện Python khoa học NumPy và SciPy. Ngoài NumPy và SciPy, chúng ta sẽ sử dụng pandas và matplotlib. Chúng ta cũng sẽ giới thiệu Jupyter Notebook, một môi trường lập trình tương tác dựa trên trình duyệt. Tóm lại, đây là những gì bạn nên biết về những công cụ này để tận dụng tối đa scikit-learn.</p>
+<section id="jupyter-notebook">
+<h4>Jupyter Notebook<a class="headerlink" href="#jupyter-notebook" title="Link to this heading">#</a></h4>
+<p>Jupyter Notebook là một môi trường tương tác để chạy mã trong trình duyệt. Đây là một công cụ tuyệt vời để phân tích dữ liệu thăm dò và được các nhà khoa học dữ liệu sử dụng rộng rãi. Mặc dù Jupyter Notebook hỗ trợ nhiều ngôn ngữ lập trình, chúng ta chỉ cần hỗ trợ Python. Jupyter Notebook giúp dễ dàng kết hợp mã, văn bản và hình ảnh, và toàn bộ cuốn sách này thực sự được viết dưới dạng một Jupyter Notebook. Tất cả các ví dụ mã mà chúng tôi bao gồm đều có thể được tải xuống từ GitHub.</p>
+</section>
+<section id="numpy">
+<h4>NumPy<a class="headerlink" href="#numpy" title="Link to this heading">#</a></h4>
+<p>NumPy là một trong những gói cơ bản cho tính toán khoa học trong Python. Nó chứa chức năng cho các mảng đa chiều, các hàm toán học cấp cao như các phép toán đại số tuyến tính và biến đổi Fourier, và các bộ tạo số giả ngẫu nhiên.</p>
+<p>Trong scikit-learn, mảng NumPy là cấu trúc dữ liệu cơ bản. scikit-learn nhận dữ liệu dưới dạng các mảng NumPy. Bất kỳ dữ liệu nào bạn đang sử dụng đều sẽ phải được chuyển đổi thành một mảng NumPy. Chức năng cốt lõi của NumPy là lớp <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, một mảng đa chiều (n-chiều). Tất cả các phần tử của mảng phải cùng một loại. Một mảng NumPy trông như thế này:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x:
+[[1 2 3]
+ [4 5 6]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chúng ta sẽ sử dụng NumPy rất nhiều trong cuốn sách này, và chúng ta sẽ gọi các đối tượng của lớp <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> của NumPy là “mảng NumPy” hoặc chỉ là “mảng”.</p>
+</section>
+<section id="scipy">
+<h4>SciPy<a class="headerlink" href="#scipy" title="Link to this heading">#</a></h4>
+<p>SciPy là một bộ sưu tập các hàm cho tính toán khoa học trong Python. Nó cung cấp, cùng với các chức năng khác, các quy trình đại số tuyến tính nâng cao, tối ưu hóa hàm toán học, xử lý tín hiệu, các hàm toán học đặc biệt và các phân phối thống kê. scikit-learn lấy từ bộ sưu tập các hàm của SciPy để triển khai các thuật toán của nó. Phần quan trọng nhất của SciPy đối với chúng ta là <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code>: nó cung cấp các ma trận thưa, là một biểu diễn khác được sử dụng cho dữ liệu trong scikit-learn. Các ma trận thưa được sử dụng bất cứ khi nào chúng ta muốn lưu trữ một mảng 2D chứa chủ yếu là các số không:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">sparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Tạo một mảng NumPy 2D với đường chéo là các số một, và các số không ở mọi nơi khác</span>
+<span class="n">eye</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mảng NumPy: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eye</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mảng NumPy: 
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chuyển đổi mảng NumPy thành ma trận thưa CSR của SciPy</span>
+<span class="c1"># Chỉ các mục khác không được lưu trữ</span>
+<span class="n">sparse_matrix</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">eye</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ma trận thưa CSR của SciPy:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sparse_matrix</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ma trận thưa CSR của SciPy:
+&lt;Compressed Sparse Row sparse matrix of dtype &#39;float64&#39;
+	with 4 stored elements and shape (4, 4)&gt;
+  Coords	Values
+  (0, 0)	1.0
+  (1, 1)	1.0
+  (2, 2)	1.0
+  (3, 3)	1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thường thì không thể tạo ra các biểu diễn dày đặc của dữ liệu thưa (vì chúng sẽ không vừa với bộ nhớ), vì vậy chúng ta cần tạo ra các biểu diễn thưa một cách trực tiếp. Đây là một cách để tạo ra cùng một ma trận thưa như trước, sử dụng định dạng COO:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">row_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">col_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">eye_coo</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">row_indices</span><span class="p">,</span> <span class="n">col_indices</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Biểu diễn COO:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eye_coo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Biểu diễn COO:
+&lt;COOrdinate sparse matrix of dtype &#39;float64&#39;
+	with 4 stored elements and shape (4, 4)&gt;
+  Coords	Values
+  (0, 0)	1.0
+  (1, 1)	1.0
+  (2, 2)	1.0
+  (3, 3)	1.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="matplotlib">
+<h4>matplotlib<a class="headerlink" href="#matplotlib" title="Link to this heading">#</a></h4>
+<p><strong>matplotlib</strong> là thư viện vẽ đồ thị khoa học chính trong Python. Nó cung cấp các hàm để tạo ra các hình ảnh trực quan chất lượng xuất bản như biểu đồ đường, biểu đồ cột, biểu đồ phân tán, v.v. Việc trực quan hóa dữ liệu và các khía cạnh khác nhau của phân tích có thể cung cấp cho bạn những hiểu biết quan trọng, và chúng ta sẽ sử dụng matplotlib cho tất cả các hình ảnh trực quan của mình. Khi làm việc trong Jupyter Notebook, bạn có thể hiển thị các hình ảnh trực tiếp trong trình duyệt bằng cách sử dụng các lệnh <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">notebook</span></code> và <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">inline</span></code>. Chúng tôi khuyên bạn nên sử dụng <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">notebook</span></code>, nó cung cấp một môi trường tương tác. Ví dụ, mã này tạo ra biểu đồ trong Hình 1-1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Tạo một chuỗi số từ -10 đến 10 với 100 bước ở giữa</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="c1"># Tạo một mảng thứ hai sử dụng sin</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># Hàm plot tạo một biểu đồ đường của một mảng so với một mảng khác</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1dcff9cafd0&gt;]
+</pre></div>
+</div>
+<img alt="../_images/840a5e340893354a02a1fc07ca3f1ac86cb0b07ad154f378692835f5d0e7c51e.png" src="../_images/840a5e340893354a02a1fc07ca3f1ac86cb0b07ad154f378692835f5d0e7c51e.png" />
+</div>
+</div>
+</section>
+<section id="pandas">
+<h4>pandas<a class="headerlink" href="#pandas" title="Link to this heading">#</a></h4>
+<p><strong>pandas</strong> là một thư viện Python để xử lý và phân tích dữ liệu. Nó được xây dựng xung quanh một cấu trúc dữ liệu gọi là <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> được mô hình hóa theo DataFrame của R. Nói một cách đơn giản, một pandas DataFrame là một bảng, tương tự như một bảng tính Excel. pandas cung cấp một loạt các phương thức để sửa đổi và thao tác trên bảng này; đặc biệt, nó cho phép các truy vấn giống như SQL và kết hợp các bảng. Trái ngược với NumPy, yêu cầu tất cả các mục trong một mảng phải cùng một loại, pandas cho phép mỗi cột có một loại riêng biệt (ví dụ: số nguyên, ngày tháng, số dấu phẩy động và chuỗi). Một công cụ có giá trị khác được cung cấp bởi pandas là khả năng nhập từ một loạt các định dạng tệp và cơ sở dữ liệu, như SQL, tệp Excel và tệp giá trị được phân tách bằng dấu phẩy (CSV). Đây là một ví dụ nhỏ về việc tạo DataFrame bằng từ điển:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+
+<span class="c1"># tạo một tập dữ liệu đơn giản về mọi người</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Anna&quot;</span><span class="p">,</span> <span class="s2">&quot;Peter&quot;</span><span class="p">,</span> <span class="s2">&quot;Linda&quot;</span><span class="p">],</span>
+        <span class="s1">&#39;Location&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;New York&quot;</span><span class="p">,</span> <span class="s2">&quot;Paris&quot;</span><span class="p">,</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span> <span class="s2">&quot;London&quot;</span><span class="p">],</span>
+        <span class="s1">&#39;Age&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">33</span><span class="p">]</span>
+       <span class="p">}</span>
+
+<span class="n">data_pandas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="c1"># IPython.display cho phép &quot;in đẹp&quot; các dataframe</span>
+<span class="c1"># trong Jupyter notebook</span>
+<span class="n">display</span><span class="p">(</span><span class="n">data_pandas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>John</td>
+      <td>New York</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Anna</td>
+      <td>Paris</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Peter</td>
+      <td>Berlin</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linda</td>
+      <td>London</td>
+      <td>33</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Có một số cách để truy vấn bảng này. Ví dụ:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chọn tất cả các hàng có cột tuổi lớn hơn 30</span>
+<span class="n">display</span><span class="p">(</span><span class="n">data_pandas</span><span class="p">[</span><span class="n">data_pandas</span><span class="o">.</span><span class="n">Age</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>Peter</td>
+      <td>Berlin</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linda</td>
+      <td>London</td>
+      <td>33</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="mglearn">
+<h4>mglearn<a class="headerlink" href="#mglearn" title="Link to this heading">#</a></h4>
+<p>Cuốn sách này đi kèm với mã nguồn, bạn có thể tìm thấy trên GitHub. Mã nguồn đi kèm không chỉ bao gồm tất cả các ví dụ được trình bày trong cuốn sách này, mà còn cả thư viện <strong>mglearn</strong>. Đây là một thư viện các hàm tiện ích mà chúng tôi đã viết cho cuốn sách này, để chúng tôi không làm lộn xộn danh sách mã của mình với các chi tiết về vẽ đồ thị và tải dữ liệu. Nếu bạn quan tâm, bạn có thể tra cứu tất cả các hàm trong kho lưu trữ, nhưng các chi tiết của mô-đun mglearn không thực sự quan trọng đối với tài liệu trong cuốn sách này. Nếu bạn thấy một lời gọi đến mglearn trong mã, đó thường là một cách để tạo ra một bức ảnh đẹp một cách nhanh chóng, hoặc để lấy một số dữ liệu thú vị.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>scikit-learn
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scikit-learn in c:\users\ad\appdata\local\programs\python\python313\lib\site-packages (1.6.1)
+Requirement already satisfied: numpy&gt;=1.19.5 in c:\users\ad\appdata\local\programs\python\python313\lib\site-packages (from scikit-learn) (2.2.4)
+Requirement already satisfied: scipy&gt;=1.6.0 in c:\users\ad\appdata\local\programs\python\python313\lib\site-packages (from scikit-learn) (1.15.2)
+Requirement already satisfied: joblib&gt;=1.2.0 in c:\users\ad\appdata\local\programs\python\python313\lib\site-packages (from scikit-learn) (1.4.2)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in c:\users\ad\appdata\local\programs\python\python313\lib\site-packages (from scikit-learn) (3.6.0)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 24.3.1 -&gt; 25.1.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="python-2-va-python-3">
+<h3>Python 2 và Python 3<a class="headerlink" href="#python-2-va-python-3" title="Link to this heading">#</a></h3>
+<p>Hiện tại có hai phiên bản chính của Python được sử dụng rộng rãi: Python 2 (chính xác hơn là 2.7) và Python 3 (với bản phát hành mới nhất là 3.5 tại thời điểm viết bài). Điều này đôi khi gây ra một số nhầm lẫn. Python 2 không còn được phát triển tích cực, nhưng vì Python 3 chứa các thay đổi lớn, mã Python 2 thường không chạy trên Python 3. Nếu bạn mới làm quen với Python, hoặc đang bắt đầu một dự án mới từ đầu, chúng tôi thực sự khuyên bạn nên sử dụng phiên bản mới nhất của Python 3 mà không có thay đổi. Nếu bạn có một cơ sở mã lớn mà bạn phụ thuộc vào được viết cho Python 2, bạn có thể tạm thời chưa nâng cấp. Tuy nhiên, bạn nên cố gắng chuyển sang Python 3 càng sớm càng tốt. Khi viết bất kỳ mã mới nào, phần lớn khá dễ dàng để viết mã chạy được trên cả Python 2 và Python 3. Nếu bạn không phải giao tiếp với phần mềm cũ, bạn chắc chắn nên sử dụng Python 3. Tất cả mã trong cuốn sách này được viết theo cách hoạt động cho cả hai phiên bản. Tuy nhiên, đầu ra chính xác có thể hơi khác một chút dưới Python 2.</p>
+</section>
+<section id="cac-phien-ban-duoc-su-dung-trong-cuon-sach-nay">
+<h3>Các phiên bản được sử dụng trong cuốn sách này<a class="headerlink" href="#cac-phien-ban-duoc-su-dung-trong-cuon-sach-nay" title="Link to this heading">#</a></h3>
+<p>Chúng tôi đang sử dụng các phiên bản sau của các thư viện đã đề cập trước đó trong cuốn sách này:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Phiên bản Python: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Phiên bản pandas: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Phiên bản matplotlib: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Phiên bản NumPy: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Phiên bản SciPy: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">IPython</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Phiên bản IPython: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">IPython</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sklearn</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Phiên bản scikit-learn: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Phiên bản Python: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+Phiên bản pandas: 2.2.3
+Phiên bản matplotlib: 3.10.3
+Phiên bản NumPy: 2.2.4
+Phiên bản SciPy: 1.15.2
+Phiên bản IPython: 9.2.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Phiên bản scikit-learn: 1.6.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ung-dung-dau-tien-phan-loai-cac-loai-hoa-iris">
+<h3>Ứng dụng đầu tiên: Phân loại các loài hoa Iris<a class="headerlink" href="#ung-dung-dau-tien-phan-loai-cac-loai-hoa-iris" title="Link to this heading">#</a></h3>
+<p>Trong phần này, chúng ta sẽ đi qua một ứng dụng học máy đơn giản và tạo ra mô hình đầu tiên của mình. Trong quá trình này, chúng ta sẽ giới thiệu một số khái niệm và thuật ngữ cốt lõi.</p>
+<p>Giả sử một nhà thực vật học nghiệp dư quan tâm đến việc phân biệt các loài hoa iris mà cô ấy đã tìm thấy. Cô ấy đã thu thập một số phép đo liên quan đến mỗi bông hoa iris: chiều dài và chiều rộng của cánh hoa và chiều dài và chiều rộng của đài hoa, tất cả đều được đo bằng centimet.</p>
+<p>Cô ấy cũng có các phép đo của một số bông hoa iris đã được một nhà thực vật học chuyên gia xác định trước đó thuộc các loài <strong>setosa</strong>, <strong>versicolor</strong>, hoặc <strong>virginica</strong>. Đối với những phép đo này, cô ấy có thể chắc chắn về loài của mỗi bông hoa iris. Giả sử rằng đây là những loài duy nhất mà nhà thực vật học nghiệp dư của chúng ta sẽ gặp trong tự nhiên.</p>
+<p>Mục tiêu của chúng ta là xây dựng một mô hình học máy có thể học từ các phép đo của những bông hoa iris này có loài đã biết, để chúng ta có thể dự đoán loài cho một bông hoa iris mới.</p>
+<p>Vì chúng ta có các phép đo mà chúng ta biết loài iris chính xác, đây là một bài toán <strong>học có giám sát</strong>. Trong bài toán này, chúng ta muốn dự đoán một trong nhiều lựa chọn (loài iris). Đây là một ví dụ về bài toán <strong>phân loại</strong>. Các kết quả có thể có (các loài iris khác nhau) được gọi là <strong>lớp</strong>. Mỗi bông hoa iris trong tập dữ liệu thuộc về một trong ba lớp, vì vậy bài toán này là một bài toán phân loại ba lớp.</p>
+<p>Đầu ra mong muốn cho một điểm dữ liệu duy nhất (một bông hoa iris) là loài của bông hoa này. Đối với một điểm dữ liệu cụ thể, loài mà nó thuộc về được gọi là <strong>nhãn</strong> của nó.</p>
+<section id="gap-go-du-lieu">
+<h4>Gặp gỡ dữ liệu<a class="headerlink" href="#gap-go-du-lieu" title="Link to this heading">#</a></h4>
+<p>Dữ liệu chúng ta sẽ sử dụng cho ví dụ này là <strong>tập dữ liệu Iris</strong>, một tập dữ liệu cổ điển trong học máy và thống kê. Nó được bao gồm trong scikit-learn trong mô-đun <code class="docutils literal notranslate"><span class="pre">datasets</span></code>. Chúng ta có thể tải nó bằng cách gọi hàm <code class="docutils literal notranslate"><span class="pre">load_iris</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span>
+<span class="n">iris_dataset</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Đối tượng <code class="docutils literal notranslate"><span class="pre">iris</span></code> được trả về bởi <code class="docutils literal notranslate"><span class="pre">load_iris</span></code> là một đối tượng <code class="docutils literal notranslate"><span class="pre">Bunch</span></code>, rất giống với một từ điển. Nó chứa các khóa và giá trị:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Các khóa của iris_dataset: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iris_dataset</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Các khóa của iris_dataset: 
+dict_keys([&#39;data&#39;, &#39;target&#39;, &#39;frame&#39;, &#39;target_names&#39;, &#39;DESCR&#39;, &#39;feature_names&#39;, &#39;filename&#39;, &#39;data_module&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Giá trị của khóa <code class="docutils literal notranslate"><span class="pre">DESCR</span></code> là một mô tả ngắn về tập dữ liệu. Chúng tôi hiển thị phần đầu của mô tả ở đây:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;DESCR&#39;</span><span class="p">][:</span><span class="mi">193</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">...&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. _iris_dataset:
+
+Iris plants dataset
+--------------------
+
+**Data Set Characteristics:**
+
+:Number of Instances: 150 (50 in each of three classes)
+:Number of Attributes: 4 numeric, predictive 
+...
+</pre></div>
+</div>
+</div>
+</div>
+<p>Giá trị của khóa <code class="docutils literal notranslate"><span class="pre">target_names</span></code> là một mảng các chuỗi, chứa các loài hoa mà chúng ta muốn dự đoán:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tên mục tiêu: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;target_names&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tên mục tiêu: [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Giá trị của <code class="docutils literal notranslate"><span class="pre">feature_names</span></code> là một danh sách các chuỗi, đưa ra mô tả của từng đặc trưng:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tên đặc trưng: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;feature_names&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tên đặc trưng: 
+[&#39;sepal length (cm)&#39;, &#39;sepal width (cm)&#39;, &#39;petal length (cm)&#39;, &#39;petal width (cm)&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dữ liệu chính nó được chứa trong các trường <code class="docutils literal notranslate"><span class="pre">target</span></code> và <code class="docutils literal notranslate"><span class="pre">data</span></code>. <code class="docutils literal notranslate"><span class="pre">data</span></code> chứa các phép đo số của chiều dài đài hoa, chiều rộng đài hoa, chiều dài cánh hoa và chiều rộng cánh hoa trong một mảng NumPy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loại dữ liệu: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loại dữ liệu: &lt;class &#39;numpy.ndarray&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Các hàng trong mảng <code class="docutils literal notranslate"><span class="pre">data</span></code> tương ứng với các bông hoa, trong khi các cột đại diện cho bốn phép đo được thực hiện cho mỗi bông hoa:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hình dạng dữ liệu: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hình dạng dữ liệu: (150, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chúng ta thấy rằng mảng chứa các phép đo cho 150 bông hoa khác nhau. Hãy nhớ rằng các mục riêng lẻ được gọi là <strong>mẫu</strong> trong học máy, và các thuộc tính của chúng được gọi là <strong>đặc trưng</strong>. Hình dạng của mảng dữ liệu là số lượng mẫu nhân với số lượng đặc trưng. Đây là một quy ước trong scikit-learn, và dữ liệu của bạn sẽ luôn được giả định là có hình dạng này. Dưới đây là các giá trị đặc trưng cho năm mẫu đầu tiên:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Năm cột đầu tiên của dữ liệu:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">5</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Năm cột đầu tiên của dữ liệu:
+[[5.1 3.5 1.4 0.2]
+ [4.9 3.  1.4 0.2]
+ [4.7 3.2 1.3 0.2]
+ [4.6 3.1 1.5 0.2]
+ [5.  3.6 1.4 0.2]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Từ dữ liệu này, chúng ta có thể thấy rằng tất cả năm bông hoa đầu tiên đều có chiều rộng cánh hoa là 0.2 cm và bông hoa đầu tiên có đài hoa dài nhất, ở mức 5.1 cm.</p>
+<p>Mảng <code class="docutils literal notranslate"><span class="pre">target</span></code> chứa loài của mỗi bông hoa đã được đo, cũng dưới dạng một mảng NumPy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loại mục tiêu: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loại mục tiêu: &lt;class &#39;numpy.ndarray&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">target</span></code> là một mảng một chiều, với một mục cho mỗi bông hoa:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hình dạng mục tiêu: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hình dạng mục tiêu: (150,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Các loài được mã hóa thành các số nguyên từ 0 đến 2:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mục tiêu:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mục tiêu:
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2
+ 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+ 2 2]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ý nghĩa của các con số được cho bởi mảng <code class="docutils literal notranslate"><span class="pre">iris['target_names']</span></code>: 0 có nghĩa là setosa, 1 có nghĩa là versicolor, và 2 có nghĩa là virginica.</p>
+</section>
+<section id="do-luong-thanh-cong-du-lieu-huan-luyen-va-du-lieu-kiem-tra">
+<h4>Đo lường thành công: Dữ liệu huấn luyện và dữ liệu kiểm tra<a class="headerlink" href="#do-luong-thanh-cong-du-lieu-huan-luyen-va-du-lieu-kiem-tra" title="Link to this heading">#</a></h4>
+<p>Chúng ta muốn xây dựng một mô hình học máy từ dữ liệu này có thể dự đoán loài iris cho một tập hợp các phép đo mới. Nhưng trước khi chúng ta có thể áp dụng mô hình của mình cho các phép đo mới, chúng ta cần biết liệu nó có thực sự hoạt động hay không—tức là, liệu chúng ta có nên tin tưởng vào các dự đoán của nó hay không.</p>
+<p>Thật không may, chúng ta không thể sử dụng dữ liệu mà chúng ta đã sử dụng để xây dựng mô hình để đánh giá nó. Điều này là do mô hình của chúng ta luôn có thể chỉ cần ghi nhớ toàn bộ tập huấn luyện, và do đó sẽ luôn dự đoán đúng nhãn cho bất kỳ điểm nào trong tập huấn luyện. Việc “ghi nhớ” này không cho chúng ta biết liệu mô hình của chúng ta có tổng quát hóa tốt hay không (nói cách khác, liệu nó có hoạt động tốt trên dữ liệu mới hay không).</p>
+<p>Để đánh giá hiệu suất của mô hình, chúng ta cho nó xem dữ liệu mới (dữ liệu mà nó chưa từng thấy trước đây) mà chúng ta có nhãn. Điều này thường được thực hiện bằng cách chia dữ liệu có nhãn mà chúng ta đã thu thập (ở đây là 150 phép đo hoa của chúng ta) thành hai phần. Một phần của dữ liệu được sử dụng để xây dựng mô hình học máy của chúng ta, và được gọi là <strong>dữ liệu huấn luyện</strong> hoặc <strong>tập huấn luyện</strong>. Phần còn lại của dữ liệu sẽ được sử dụng để đánh giá mô hình hoạt động tốt như thế nào; phần này được gọi là <strong>dữ liệu kiểm tra</strong>, <strong>tập kiểm tra</strong>, hoặc <strong>tập giữ lại</strong>.</p>
+<p>scikit-learn chứa một hàm xáo trộn tập dữ liệu và chia nó cho bạn: hàm <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>. Hàm này trích xuất 75% các hàng trong dữ liệu làm tập huấn luyện, cùng với các nhãn tương ứng cho dữ liệu này. 25% còn lại của dữ liệu, cùng với các nhãn còn lại, được khai báo là tập kiểm tra. Việc quyết định bạn muốn đưa bao nhiêu dữ liệu vào tập huấn luyện và tập kiểm tra tương ứng là hơi tùy ý, nhưng việc sử dụng một tập kiểm tra chứa 25% dữ liệu là một quy tắc chung tốt.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trước khi thực hiện việc chia, hàm <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> xáo trộn tập dữ liệu bằng cách sử dụng một bộ tạo số giả ngẫu nhiên. Nếu chúng ta chỉ lấy 25% dữ liệu cuối cùng làm tập kiểm tra, tất cả các điểm dữ liệu sẽ có nhãn 2, vì các điểm dữ liệu được sắp xếp theo nhãn (xem đầu ra cho <code class="docutils literal notranslate"><span class="pre">iris['target']</span></code> được hiển thị trước đó). Việc sử dụng một tập kiểm tra chỉ chứa một trong ba lớp sẽ không cho chúng ta biết nhiều về mức độ tổng quát hóa của mô hình, vì vậy chúng ta xáo trộn dữ liệu để đảm bảo tập kiểm tra chứa dữ liệu từ tất cả các lớp.</p>
+<p>Để đảm bảo rằng chúng ta sẽ nhận được cùng một đầu ra nếu chúng ta chạy cùng một hàm nhiều lần, chúng ta cung cấp cho bộ tạo số giả ngẫu nhiên một hạt giống cố định bằng cách sử dụng tham số <code class="docutils literal notranslate"><span class="pre">random_state</span></code>. Điều này sẽ làm cho kết quả trở nên xác định, vì vậy dòng này sẽ luôn có cùng một kết quả. Chúng ta sẽ luôn cố định <code class="docutils literal notranslate"><span class="pre">random_state</span></code> theo cách này khi sử dụng các thủ tục ngẫu nhiên trong cuốn sách này.</p>
+<p>Đầu ra của hàm <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> là <code class="docutils literal notranslate"><span class="pre">X_train</span></code>, <code class="docutils literal notranslate"><span class="pre">X_test</span></code>, <code class="docutils literal notranslate"><span class="pre">y_train</span></code> và <code class="docutils literal notranslate"><span class="pre">y_test</span></code>, tất cả đều là các mảng NumPy. <code class="docutils literal notranslate"><span class="pre">X_train</span></code> chứa 75% các hàng của tập dữ liệu, và <code class="docutils literal notranslate"><span class="pre">X_test</span></code> chứa 25% còn lại:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hình dạng X_train: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hình dạng y_train: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hình dạng X_train: (112, 4)
+Hình dạng y_train: (112,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hình dạng X_test: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hình dạng y_test: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hình dạng X_test: (38, 4)
+Hình dạng y_test: (38,)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dieu-dau-tien-nhin-vao-du-lieu-cua-ban">
+<h4>Điều đầu tiên: Nhìn vào dữ liệu của bạn<a class="headerlink" href="#dieu-dau-tien-nhin-vao-du-lieu-cua-ban" title="Link to this heading">#</a></h4>
+<p>Trước khi xây dựng một mô hình học máy, thường là một ý tưởng tốt để kiểm tra dữ liệu, để xem liệu nhiệm vụ có thể dễ dàng giải quyết mà không cần học máy hay không, hoặc liệu thông tin mong muốn có thể không có trong dữ liệu hay không.</p>
+<p>Ngoài ra, việc kiểm tra dữ liệu của bạn là một cách tốt để tìm ra những điểm bất thường và đặc biệt. Ví dụ, có thể một số bông hoa iris của bạn được đo bằng inch chứ không phải centimet. Trong thế giới thực, sự không nhất quán trong dữ liệu và các phép đo bất ngờ rất phổ biến.</p>
+<p>Một trong những cách tốt nhất để kiểm tra dữ liệu là trực quan hóa nó. Một cách để làm điều này là sử dụng một <strong>biểu đồ phân tán</strong>. Một biểu đồ phân tán của dữ liệu đặt một đặc trưng dọc theo trục x và một đặc trưng khác dọc theo trục y, và vẽ một dấu chấm cho mỗi điểm dữ liệu. Thật không may, màn hình máy tính chỉ có hai chiều, cho phép chúng ta chỉ vẽ được hai (hoặc có thể là ba) đặc trưng tại một thời điểm. Rất khó để vẽ các tập dữ liệu có nhiều hơn ba đặc trưng theo cách này. Một cách giải quyết vấn đề này là thực hiện một <strong>biểu đồ cặp</strong>, nó xem xét tất cả các cặp đặc trưng có thể có. Nếu bạn có một số lượng nhỏ các đặc trưng, chẳng hạn như bốn đặc trưng chúng ta có ở đây, điều này khá hợp lý. Tuy nhiên, bạn nên ghi nhớ rằng một biểu đồ cặp không hiển thị sự tương tác của tất cả các đặc trưng cùng một lúc, vì vậy một số khía cạnh thú vị của dữ liệu có thể không được tiết lộ khi trực quan hóa nó theo cách này.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mglearn</span>
+
+<span class="c1"># tạo dataframe từ dữ liệu trong X_train</span>
+<span class="c1"># gán nhãn cho các cột bằng các chuỗi trong iris_dataset.feature_names</span>
+<span class="n">iris_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris_dataset</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="c1"># tạo một ma trận phân tán từ dataframe, tô màu theo y_train</span>
+<span class="n">grr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">iris_dataframe</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> 
+                           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">hist_kwds</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bins&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> 
+                           <span class="n">alpha</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">mglearn</span><span class="o">.</span><span class="n">cm3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8381f268ed838861f58a46196016e2dc527eb622a7858b01835500dd9692a846.png" src="../_images/8381f268ed838861f58a46196016e2dc527eb622a7858b01835500dd9692a846.png" />
+</div>
+</div>
+<p>Từ các biểu đồ, chúng ta có thể thấy rằng ba lớp dường như được phân tách tương đối tốt bằng cách sử dụng các phép đo đài hoa và cánh hoa. Điều này có nghĩa là một mô hình học máy có khả năng sẽ có thể học cách tách chúng.</p>
+</section>
+<section id="xay-dung-mo-hinh-dau-tien-cua-ban-k-hang-xom-gan-nhat">
+<h4>Xây dựng mô hình đầu tiên của bạn: k-Hàng xóm gần nhất<a class="headerlink" href="#xay-dung-mo-hinh-dau-tien-cua-ban-k-hang-xom-gan-nhat" title="Link to this heading">#</a></h4>
+<p>Bây giờ chúng ta có thể bắt đầu xây dựng mô hình học máy thực tế. Có nhiều thuật toán phân loại trong scikit-learn mà chúng ta có thể sử dụng. Ở đây chúng ta sẽ sử dụng bộ phân loại <strong>k-hàng xóm gần nhất</strong>, rất dễ hiểu. Việc xây dựng mô hình này chỉ bao gồm việc lưu trữ tập huấn luyện. Để đưa ra dự đoán cho một điểm dữ liệu mới, thuật toán sẽ tìm điểm trong tập huấn luyện gần nhất với điểm mới. Sau đó, nó gán nhãn của điểm huấn luyện này cho điểm dữ liệu mới.</p>
+<p>Ký tự k trong k-hàng xóm gần nhất biểu thị rằng thay vì chỉ sử dụng hàng xóm gần nhất với điểm dữ liệu mới, chúng ta có thể xem xét một số lượng cố định k hàng xóm bất kỳ trong quá trình huấn luyện (ví dụ: ba hoặc năm hàng xóm gần nhất). Sau đó, chúng ta có thể đưa ra dự đoán bằng cách sử dụng lớp đa số trong số các hàng xóm này. Chúng ta sẽ đi sâu hơn vào chi tiết này trong Chương 2; bây giờ, chúng ta sẽ chỉ sử dụng một hàng xóm duy nhất.</p>
+<p>Tất cả các mô hình học máy trong scikit-learn được triển khai trong các lớp riêng của chúng, được gọi là các lớp <code class="docutils literal notranslate"><span class="pre">Estimator</span></code>. Thuật toán phân loại k-hàng xóm gần nhất được triển khai trong lớp <code class="docutils literal notranslate"><span class="pre">KNeighborsClassifier</span></code> trong mô-đun <code class="docutils literal notranslate"><span class="pre">neighbors</span></code>. Trước khi chúng ta có thể sử dụng mô hình, chúng ta cần khởi tạo lớp thành một đối tượng. Đây là lúc chúng ta sẽ thiết lập bất kỳ tham số nào của mô hình. Tham số quan trọng nhất của <code class="docutils literal notranslate"><span class="pre">KNeighborsClassifier</span></code> là số lượng hàng xóm, mà chúng ta sẽ đặt thành 1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Đối tượng <code class="docutils literal notranslate"><span class="pre">knn</span></code> đóng gói thuật toán sẽ được sử dụng để xây dựng mô hình từ dữ liệu huấn luyện, cũng như thuật toán để đưa ra dự đoán trên dữ liệu mới. Nó cũng sẽ giữ thông tin mà thuật toán đã trích xuất từ dữ liệu huấn luyện. Trong trường hợp của <code class="docutils literal notranslate"><span class="pre">KNeighborsClassifier</span></code>, nó sẽ chỉ lưu trữ tập huấn luyện.</p>
+<p>Để xây dựng mô hình trên tập huấn luyện, chúng ta gọi phương thức <code class="docutils literal notranslate"><span class="pre">fit</span></code> của đối tượng <code class="docutils literal notranslate"><span class="pre">knn</span></code>, nó nhận các đối số là mảng NumPy <code class="docutils literal notranslate"><span class="pre">X_train</span></code> chứa dữ liệu huấn luyện và mảng NumPy <code class="docutils literal notranslate"><span class="pre">y_train</span></code> của các nhãn huấn luyện tương ứng:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>KNeighborsClassifier(n_neighbors=1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>KNeighborsClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.neighbors.KNeighborsClassifier.html">?<span>Documentation for KNeighborsClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>KNeighborsClassifier(n_neighbors=1)</pre></div> </div></div></div></div></div></div>
+</div>
+<p>Phương thức <code class="docutils literal notranslate"><span class="pre">fit</span></code> trả về chính đối tượng <code class="docutils literal notranslate"><span class="pre">knn</span></code> (và sửa đổi nó tại chỗ), vì vậy chúng ta nhận được một biểu diễn chuỗi của bộ phân loại của mình. Biểu diễn này cho chúng ta thấy những tham số nào đã được sử dụng để tạo mô hình. Hầu hết chúng đều là các giá trị mặc định, nhưng bạn cũng có thể tìm thấy <code class="docutils literal notranslate"><span class="pre">n_neighbors=1</span></code>, là tham số mà chúng ta đã truyền vào. Hầu hết các mô hình trong scikit-learn đều có nhiều tham số, nhưng phần lớn chúng là các tối ưu hóa tốc độ hoặc cho các trường hợp sử dụng rất đặc biệt. Bạn không cần phải lo lắng về các tham số khác được hiển thị trong biểu diễn này. Việc in một mô hình scikit-learn có thể tạo ra các chuỗi rất dài, nhưng đừng bị chúng làm cho sợ hãi. Chúng ta sẽ đề cập đến tất cả các tham số quan trọng trong Chương 2. Trong phần còn lại của cuốn sách này, chúng ta sẽ không hiển thị đầu ra của <code class="docutils literal notranslate"><span class="pre">fit</span></code> vì nó không chứa bất kỳ thông tin mới nào.</p>
+</section>
+<section id="dua-ra-du-doan">
+<h4>Đưa ra dự đoán<a class="headerlink" href="#dua-ra-du-doan" title="Link to this heading">#</a></h4>
+<p>Bây giờ chúng ta có thể đưa ra dự đoán bằng mô hình này trên dữ liệu mới mà chúng ta có thể không biết nhãn chính xác. Hãy tưởng tượng chúng ta tìm thấy một bông hoa iris trong tự nhiên có chiều dài đài hoa là 5 cm, chiều rộng đài hoa là 2.9 cm, chiều dài cánh hoa là 1 cm và chiều rộng cánh hoa là 0.2 cm. Loài iris này sẽ là gì? Chúng ta có thể đưa dữ liệu này vào một mảng NumPy, một lần nữa bằng cách tính toán hình dạng—tức là, số lượng mẫu (1) nhân với số lượng đặc trưng (4):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hình dạng X_new: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hình dạng X_new: (1, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lưu ý rằng chúng ta đã biến các phép đo của một bông hoa duy nhất này thành một hàng trong một mảng NumPy hai chiều, vì scikit-learn luôn mong đợi các mảng hai chiều cho dữ liệu.</p>
+<p>Để đưa ra dự đoán, chúng ta gọi phương thức <code class="docutils literal notranslate"><span class="pre">predict</span></code> của đối tượng <code class="docutils literal notranslate"><span class="pre">knn</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prediction</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dự đoán: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prediction</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tên mục tiêu dự đoán: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;target_names&#39;</span><span class="p">][</span><span class="n">prediction</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dự đoán: [0]
+Tên mục tiêu dự đoán: [&#39;setosa&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mô hình của chúng ta dự đoán rằng bông hoa iris mới này thuộc về lớp 0, có nghĩa là loài của nó là setosa. Nhưng làm thế nào để chúng ta biết liệu chúng ta có thể tin tưởng vào mô hình của mình hay không? Chúng ta không biết loài chính xác của mẫu này, đó là toàn bộ mục đích của việc xây dựng mô hình!</p>
+</section>
+<section id="danh-gia-mo-hinh">
+<h4>Đánh giá mô hình<a class="headerlink" href="#danh-gia-mo-hinh" title="Link to this heading">#</a></h4>
+<p>Đây là lúc tập kiểm tra mà chúng ta đã tạo trước đó phát huy tác dụng. Dữ liệu này không được sử dụng để xây dựng mô hình, nhưng chúng ta biết loài chính xác của mỗi bông hoa iris trong tập kiểm tra.</p>
+<p>Do đó, chúng ta có thể đưa ra dự đoán cho mỗi bông hoa iris trong dữ liệu kiểm tra và so sánh nó với nhãn của nó (loài đã biết). Chúng ta có thể đo lường mô hình hoạt động tốt như thế nào bằng cách tính toán <strong>độ chính xác</strong>, là tỷ lệ phần trăm các bông hoa được dự đoán đúng loài:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dự đoán tập kiểm tra:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dự đoán tập kiểm tra:
+ [2 1 0 2 0 2 0 1 1 1 2 1 1 1 1 0 1 1 0 0 2 1 0 0 2 0 0 1 1 0 2 1 0 2 2 1 0
+ 2]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Điểm tập kiểm tra: </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Điểm tập kiểm tra: 0.97
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chúng ta cũng có thể sử dụng phương thức <code class="docutils literal notranslate"><span class="pre">score</span></code> của đối tượng <code class="docutils literal notranslate"><span class="pre">knn</span></code>, nó sẽ tính toán độ chính xác của tập kiểm tra cho chúng ta:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Điểm tập kiểm tra: </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Điểm tập kiểm tra: 0.97
+</pre></div>
+</div>
+</div>
+</div>
+<p>Đối với mô hình này, độ chính xác của tập kiểm tra là khoảng 0.97, có nghĩa là chúng ta đã đưa ra dự đoán đúng cho 97% số hoa iris trong tập kiểm tra. Dưới một số giả định toán học, điều này có nghĩa là chúng ta có thể mong đợi mô hình của mình sẽ đúng 97% thời gian đối với các bông hoa iris mới. Đối với ứng dụng của nhà thực vật học nghiệp dư của chúng ta, mức độ chính xác cao này có nghĩa là mô hình của chúng ta có thể đủ đáng tin cậy để sử dụng. Trong các chương sau, chúng ta sẽ thảo luận về cách chúng ta có thể cải thiện hiệu suất, và những lưu ý cần có khi tinh chỉnh một mô hình.</p>
+</section>
+</section>
+<section id="tom-tat-va-trien-vong">
+<h3>Tóm tắt và Triển vọng<a class="headerlink" href="#tom-tat-va-trien-vong" title="Link to this heading">#</a></h3>
+<p>Hãy tóm tắt những gì chúng ta đã học được trong chương này. Chúng ta bắt đầu với một giới thiệu ngắn gọn về học máy và các ứng dụng của nó, sau đó thảo luận về sự khác biệt giữa học có giám sát và không giám sát và đưa ra một cái nhìn tổng quan về các công cụ chúng ta sẽ sử dụng trong cuốn sách này. Sau đó, chúng ta đã xây dựng nhiệm vụ dự đoán loài của một bông hoa iris cụ thể bằng cách sử dụng các phép đo vật lý của bông hoa. Chúng ta đã sử dụng một tập dữ liệu các phép đo được một chuyên gia chú thích với loài chính xác để xây dựng mô hình của mình, biến đây thành một nhiệm vụ học có giám sát. Có ba loài có thể có, setosa, versicolor, hoặc virginica, đã biến nhiệm vụ này thành một bài toán phân loại ba lớp. Các loài có thể có được gọi là lớp trong bài toán phân loại, và loài của một bông hoa iris duy nhất được gọi là nhãn của nó.</p>
+<p>Tập dữ liệu Iris bao gồm hai mảng NumPy: một chứa dữ liệu, được gọi là X trong scikit-learn, và một chứa các đầu ra chính xác hoặc mong muốn, được gọi là y. Mảng X là một mảng hai chiều các đặc trưng, với một hàng cho mỗi điểm dữ liệu và một cột cho mỗi đặc trưng. Mảng y là một mảng một chiều, ở đây chứa một nhãn lớp, một số nguyên từ 0 đến 2, cho mỗi mẫu.</p>
+<p>Chúng ta đã chia tập dữ liệu của mình thành một tập huấn luyện, để xây dựng mô hình của chúng ta, và một tập kiểm tra, để đánh giá mức độ tổng quát hóa của mô hình của chúng ta đối với dữ liệu mới, chưa từng thấy trước đây.</p>
+<p>Chúng ta đã chọn thuật toán phân loại k-hàng xóm gần nhất, nó đưa ra dự đoán cho một điểm dữ liệu mới bằng cách xem xét (các) hàng xóm gần nhất của nó trong tập huấn luyện. Điều này được triển khai trong lớp <code class="docutils literal notranslate"><span class="pre">KNeighborsClassifier</span></code>, nó chứa thuật toán xây dựng mô hình cũng như thuật toán đưa ra dự đoán bằng mô hình. Chúng ta đã khởi tạo lớp, thiết lập các tham số. Sau đó, chúng ta xây dựng mô hình bằng cách gọi phương thức <code class="docutils literal notranslate"><span class="pre">fit</span></code>, truyền dữ liệu huấn luyện (<code class="docutils literal notranslate"><span class="pre">X_train</span></code>) và đầu ra huấn luyện (<code class="docutils literal notranslate"><span class="pre">y_train</span></code>) làm tham số. Chúng ta đã đánh giá mô hình bằng phương thức <code class="docutils literal notranslate"><span class="pre">score</span></code>, nó tính toán độ chính xác của mô hình. Chúng ta đã áp dụng phương thức score cho dữ liệu tập kiểm tra và nhãn tập kiểm tra và thấy rằng mô hình của chúng ta có độ chính xác khoảng 97%, có nghĩa là nó đúng 97% thời gian trên tập kiểm tra.</p>
+<p>Điều này đã cho chúng ta sự tự tin để áp dụng mô hình cho dữ liệu mới (trong ví dụ của chúng ta, các phép đo hoa mới) và tin tưởng rằng mô hình sẽ đúng khoảng 97% thời gian.</p>
+<p>Đây là bản tóm tắt mã cần thiết cho toàn bộ quy trình huấn luyện và đánh giá:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span>
+<span class="n">iris_dataset</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">iris_dataset</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Điểm tập kiểm tra: </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Điểm tập kiểm tra: 0.97
+</pre></div>
+</div>
+</div>
+</div>
+<p>Đoạn mã này chứa mã cốt lõi để áp dụng bất kỳ thuật toán học máy nào bằng scikit-learn. Các phương thức <code class="docutils literal notranslate"><span class="pre">fit</span></code>, <code class="docutils literal notranslate"><span class="pre">predict</span></code> và <code class="docutils literal notranslate"><span class="pre">score</span></code> là giao diện chung cho các mô hình có giám sát trong scikit-learn, và với các khái niệm được giới thiệu trong chương này, bạn có thể áp dụng các mô hình này cho nhiều nhiệm vụ học máy. Trong chương tiếp theo, chúng ta sẽ đi sâu hơn về các loại mô hình có giám sát khác nhau trong scikit-learn và cách áp dụng chúng một cách thành công.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chapter10-visualization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">10. Trực quan hóa dữ liệu</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chapter12-Supervised.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chương 12: Các mô hình học máy có giám sát</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gioi-thieu">Giới thiệu</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tai-sao-lai-la-hoc-may">Tại sao lại là Học máy?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cac-van-de-hoc-may-co-the-giai-quyet">Các vấn đề Học máy có thể giải quyết</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hieu-ro-nhiem-vu-va-du-lieu-cua-ban">Hiểu rõ Nhiệm vụ và Dữ liệu của bạn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tai-sao-lai-la-python">Tại sao lại là Python?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn">scikit-learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cai-dat-scikit-learn">Cài đặt scikit-learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cac-thu-vien-va-cong-cu-thiet-yeu">Các Thư viện và Công cụ Thiết yếu</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook">Jupyter Notebook</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy">NumPy</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy">SciPy</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib">matplotlib</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas">pandas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mglearn">mglearn</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-2-va-python-3">Python 2 và Python 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cac-phien-ban-duoc-su-dung-trong-cuon-sach-nay">Các phiên bản được sử dụng trong cuốn sách này</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ung-dung-dau-tien-phan-loai-cac-loai-hoa-iris">Ứng dụng đầu tiên: Phân loại các loài hoa Iris</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gap-go-du-lieu">Gặp gỡ dữ liệu</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#do-luong-thanh-cong-du-lieu-huan-luyen-va-du-lieu-kiem-tra">Đo lường thành công: Dữ liệu huấn luyện và dữ liệu kiểm tra</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dieu-dau-tien-nhin-vao-du-lieu-cua-ban">Điều đầu tiên: Nhìn vào dữ liệu của bạn</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xay-dung-mo-hinh-dau-tien-cua-ban-k-hang-xom-gan-nhat">Xây dựng mô hình đầu tiên của bạn: k-Hàng xóm gần nhất</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dua-ra-du-doan">Đưa ra dự đoán</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#danh-gia-mo-hinh">Đánh giá mô hình</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tom-tat-va-trien-vong">Tóm tắt và Triển vọng</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Trường Công nghệ, Đại học Kinh tế Quốc dân
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
