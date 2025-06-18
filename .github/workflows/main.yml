@@ -1,0 +1,46 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Checks out your repository so the workflow can access it
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4 # Configures GitHub Pages with a GITHUB_TOKEN
+
+      # If you have a build step that generates _build/html, add it here.
+      # For example, if you're using Sphinx for documentation:
+      # - name: Set up Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.x'
+      # - name: Install dependencies
+      #   run: pip install -r requirements.txt
+      # - name: Build HTML
+      #   run: make html # Or whatever command builds your site into _build/html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3 # Uploads the _build/html directory as an artifact
+        with:
+          path: '_build/html' # Path to the directory containing your static files
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # Deploys the artifact to GitHub Pages
